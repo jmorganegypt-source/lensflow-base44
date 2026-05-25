@@ -33,33 +33,33 @@ export default function MediaDashboard({ listingUrl, onReset }) {
   const [isPlaying, setIsPlaying] = useState(false);
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <header className="flex items-center justify-between px-8 py-6">
-        <div className="flex items-center gap-3">
-          <img src={LOGO} alt="LensFlow" className="w-10 h-10" />
-          <span className="text-xl font-bold text-white">LensFlow</span>
-        </div>
-        <Button variant="ghost" onClick={onReset} className="text-slate-400 hover:text-white hover:bg-slate-800">
+    <div className="min-h-screen bg-[#f5f0e8] flex flex-col">
+      <header className="flex items-center justify-between px-8 py-5 border-b border-stone-200 bg-[#f5f0e8]/90 backdrop-blur-sm">
+        <a href="https://www.lensflow.com.au" className="flex items-center gap-3">
+          <img src={LOGO} alt="LensFlow" className="w-9 h-9" />
+          <span className="text-lg font-bold text-stone-900 tracking-tight">LENS FLOW</span>
+        </a>
+        <Button variant="ghost" onClick={onReset} className="text-stone-500 hover:text-stone-900 hover:bg-stone-100 rounded-full">
           <RotateCcw className="w-4 h-4 mr-2" />
           New Reel
         </Button>
       </header>
 
-      <main className="flex-1 flex flex-col lg:flex-row items-center justify-center gap-10 px-6 pb-12">
+      <main className="flex-1 flex flex-col lg:flex-row items-center justify-center gap-12 px-6 pb-12 pt-8">
         <div className="animate-scale-in">
-          <div className="relative w-[280px] sm:w-[320px] aspect-[9/16] rounded-3xl overflow-hidden glass-card shadow-[0_0_60px_rgba(59,130,246,0.15)]">
+          <div className="relative w-[260px] sm:w-[300px] aspect-[9/16] rounded-3xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.15)] border border-stone-200">
             <div className="absolute inset-0">
               <img
                 src={THUMB_IMG}
                 alt="Video preview"
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10" />
             </div>
             {!isPlaying && (
               <button onClick={() => setIsPlaying(true)} className="absolute inset-0 flex items-center justify-center group">
-                <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/30 group-hover:bg-white/30 transition-all duration-300 group-hover:scale-110">
-                  <Play className="w-7 h-7 text-white ml-1" fill="white" />
+                <div className="w-16 h-16 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-300">
+                  <Play className="w-7 h-7 text-stone-900 ml-1" fill="currentColor" />
                 </div>
               </button>
             )}
@@ -72,55 +72,59 @@ export default function MediaDashboard({ listingUrl, onReset }) {
                 </div>
               </button>
             )}
-            <div className="absolute bottom-4 right-4 px-2 py-1 rounded-md bg-black/60 backdrop-blur-sm text-xs text-white font-medium">0:32</div>
-            <div className="absolute top-3 left-1/2 -translate-x-1/2 w-20 h-5 rounded-full bg-black/80" />
+            <div className="absolute bottom-4 right-4 px-2 py-1 rounded-md bg-black/50 backdrop-blur-sm text-xs text-white font-medium">0:32</div>
+            <div className="absolute top-3 left-1/2 -translate-x-1/2 w-20 h-5 rounded-full bg-black/70" />
           </div>
         </div>
 
-        <div className="animate-fade-in-up max-w-md space-y-8" style={{ animationDelay: "0.2s" }}>
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 border border-green-500/20 text-sm text-green-400">
-            <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-            Video reel ready
+        <div className="animate-fade-in-up max-w-md space-y-7" style={{ animationDelay: "0.2s" }}>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-green-50 border border-green-200 text-sm text-green-700 font-medium">
+            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+            Reel ready to download
           </div>
 
           <div className="space-y-3">
-            <h2 className="text-3xl md:text-4xl font-bold text-white">Your Reel is Ready</h2>
-            <p className="text-slate-400 leading-relaxed">Your professional property video reel has been generated and is ready to download or share directly to social media.</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-stone-900">Your Reel is Ready</h2>
+            <p className="text-stone-500 leading-relaxed">Your professional property video reel is ready to download or share directly to social media. REA · Domain · Instagram ready.</p>
           </div>
 
-          <div className="flex items-center gap-3 p-3 rounded-xl bg-slate-900/50 border border-slate-800">
-            <ExternalLink className="w-4 h-4 text-slate-500 flex-shrink-0" />
-            <span className="text-sm text-slate-400 truncate">{listingUrl}</span>
+          <div className="flex items-center gap-3 p-3 rounded-xl bg-white border border-stone-200 shadow-sm">
+            <ExternalLink className="w-4 h-4 text-stone-400 flex-shrink-0" />
+            <span className="text-sm text-stone-500 truncate">{listingUrl}</span>
           </div>
 
           <div className="space-y-3">
-            <Button className="w-full h-12 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-semibold text-base shadow-lg shadow-blue-500/20 transition-all duration-300">
+            <Button className="w-full h-12 rounded-xl bg-stone-900 hover:bg-stone-700 text-white font-semibold text-base shadow-sm transition-all duration-300">
               <Download className="w-5 h-5 mr-2" />
               Download Video
             </Button>
-            <Button variant="outline" className="w-full h-12 rounded-xl border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-white font-medium">
+            <Button variant="outline" className="w-full h-12 rounded-xl border-stone-300 text-stone-700 hover:bg-stone-100 font-medium">
               <Share2 className="w-5 h-5 mr-2" />
               Copy Share Link
             </Button>
           </div>
 
           <div className="space-y-3">
-            <p className="text-sm text-slate-500 font-medium">Share directly to</p>
+            <p className="text-sm text-stone-400 font-medium">Share directly to</p>
             <div className="flex items-center gap-3">
-              <button className="flex items-center justify-center w-12 h-12 rounded-xl glass-card hover:bg-pink-500/10 hover:border-pink-500/30 transition-all duration-300 group">
-                <Instagram className="w-5 h-5 text-slate-400 group-hover:text-pink-400 transition-colors" />
+              <button className="flex items-center justify-center w-12 h-12 rounded-xl bg-white border border-stone-200 hover:border-pink-300 hover:bg-pink-50 transition-all duration-300 group shadow-sm">
+                <Instagram className="w-5 h-5 text-stone-400 group-hover:text-pink-500 transition-colors" />
               </button>
-              <button className="flex items-center justify-center w-12 h-12 rounded-xl glass-card hover:bg-slate-500/10 hover:border-slate-400/30 transition-all duration-300 group">
-                <TikTokIcon className="w-5 h-5 text-slate-400 group-hover:text-white transition-colors" />
+              <button className="flex items-center justify-center w-12 h-12 rounded-xl bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 transition-all duration-300 group shadow-sm">
+                <TikTokIcon className="w-5 h-5 text-stone-400 group-hover:text-stone-900 transition-colors" />
               </button>
-              <button className="flex items-center justify-center w-12 h-12 rounded-xl glass-card hover:bg-red-500/10 hover:border-red-500/30 transition-all duration-300 group">
-                <YouTubeIcon className="w-5 h-5 text-slate-400 group-hover:text-red-400 transition-colors" />
+              <button className="flex items-center justify-center w-12 h-12 rounded-xl bg-white border border-stone-200 hover:border-red-300 hover:bg-red-50 transition-all duration-300 group shadow-sm">
+                <YouTubeIcon className="w-5 h-5 text-stone-400 group-hover:text-red-500 transition-colors" />
               </button>
-              <button className="flex items-center justify-center w-12 h-12 rounded-xl glass-card hover:bg-blue-500/10 hover:border-blue-500/30 transition-all duration-300 group">
-                <XIcon className="w-5 h-5 text-slate-400 group-hover:text-blue-400 transition-colors" />
+              <button className="flex items-center justify-center w-12 h-12 rounded-xl bg-white border border-stone-200 hover:border-stone-400 hover:bg-stone-50 transition-all duration-300 group shadow-sm">
+                <XIcon className="w-5 h-5 text-stone-400 group-hover:text-stone-900 transition-colors" />
               </button>
             </div>
           </div>
+
+          <p className="text-xs text-stone-400 pt-2">
+            Part of the <a href="https://www.lensflow.com.au" className="text-amber-600 hover:underline font-medium">LensFlow platform</a> — Australia's #1 AI real estate media suite.
+          </p>
         </div>
       </main>
     </div>

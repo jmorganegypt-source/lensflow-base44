@@ -5,6 +5,7 @@ import { Sparkles, ArrowRight, Globe, Zap, Film, Video } from "lucide-react";
 
 const LOGO = "https://media.base44.com/images/public/6a1440ebe28bb283cc5442e2/bc7de8a58_logo-lensflow-mark.png";
 const HERO_IMG = "https://media.base44.com/images/public/6a1440ebe28bb283cc5442e2/f3fcd76f0_hero-luxury-property-twilight.png";
+const TAGLINE = "Paste any property listing URL. Mia writes the script, voices the narration, and renders a 9:16 reel ready for REA, Instagram and TikTok.";
 
 export default function InputScreen({ onGenerate }) {
   const [url, setUrl] = useState("");
@@ -16,47 +17,51 @@ export default function InputScreen({ onGenerate }) {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <header className="flex items-center justify-between px-8 py-6">
-        <div className="flex items-center gap-3">
-          <img src={LOGO} alt="LensFlow" className="w-10 h-10" />
-          <span className="text-xl font-bold text-white">LensFlow</span>
-        </div>
-        <nav className="hidden md:flex items-center gap-8">
-          <a href="#" className="text-sm text-slate-400 hover:text-white transition-colors">Features</a>
-          <a href="#" className="text-sm text-slate-400 hover:text-white transition-colors">Pricing</a>
-          <a href="#" className="text-sm text-slate-400 hover:text-white transition-colors">Examples</a>
-          <Button variant="outline" size="sm" className="border-slate-700 text-slate-300 hover:bg-slate-800 hover:text-white">
-            Sign In
-          </Button>
+    <div className="min-h-screen flex flex-col bg-[#f5f0e8]">
+      <header className="flex items-center justify-between px-8 py-5 border-b border-stone-200 bg-[#f5f0e8]/90 backdrop-blur-sm">
+        <a href="https://www.lensflow.com.au" className="flex items-center gap-3">
+          <img src={LOGO} alt="LensFlow" className="w-9 h-9" />
+          <span className="text-lg font-bold text-stone-900 tracking-tight">LENS FLOW</span>
+        </a>
+        <nav className="hidden md:flex items-center gap-7">
+          <a href="https://www.lensflow.com.au/presenters" className="text-sm text-stone-500 hover:text-stone-900 transition-colors font-medium">Presenters</a>
+          <a href="https://www.lensflow.com.au/pricing" className="text-sm text-stone-500 hover:text-stone-900 transition-colors font-medium">Pricing</a>
+          <a href="https://www.lensflow.com.au/compare" className="text-sm text-stone-500 hover:text-stone-900 transition-colors font-medium">Compare</a>
+          <a href="https://www.lensflow.com.au" className="text-sm text-stone-500 hover:text-stone-900 transition-colors font-medium">Done-for-You</a>
+          <a href="https://www.lensflow.com.au/login" className="text-sm text-stone-600 hover:text-stone-900 transition-colors font-medium">Sign In</a>
+          <a href="https://www.lensflow.com.au/register">
+            <Button className="rounded-full bg-stone-900 hover:bg-stone-700 text-white text-sm px-5 font-medium">
+              Start Recording
+            </Button>
+          </a>
         </nav>
       </header>
 
-      <main className="flex-1 flex flex-col items-center justify-center px-6 pb-20">
-        <div className="animate-fade-in-up max-w-3xl w-full text-center space-y-8">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-sm text-slate-300">
-            <Sparkles className="w-4 h-4 text-blue-400" />
-            <span>AI-Powered Real Estate Video Generation</span>
+      <main className="flex-1 flex flex-col items-center justify-center px-6 pb-16">
+        <div className="animate-fade-in-up max-w-3xl w-full text-center space-y-7 pt-12">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-amber-300/60 bg-amber-50 text-sm text-amber-800 font-medium">
+            <Sparkles className="w-3.5 h-3.5 text-amber-600" />
+            <span>#1 AI Real Estate Media Platform</span>
           </div>
 
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight">
-            <span className="text-white">Turn Listings Into</span>
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-stone-900 leading-tight">
+            Turn Listings Into
             <br />
             <span className="gradient-text">Stunning Video Reels</span>
           </h1>
 
-          <p className="text-lg md:text-xl text-slate-400 max-w-xl mx-auto leading-relaxed">
-            Paste any property listing URL and watch AI create a professional 9:16 video reel ready for Instagram, TikTok, and YouTube Shorts.
+          <p className="text-lg md:text-xl text-stone-500 max-w-xl mx-auto leading-relaxed">
+            {TAGLINE}
           </p>
 
-          <form onSubmit={handleSubmit} className="max-w-2xl mx-auto w-full pt-4">
+          <form onSubmit={handleSubmit} className="max-w-2xl mx-auto w-full pt-2">
             <div className={`relative rounded-2xl transition-all duration-300 ${
-              isFocused ? "shadow-[0_0_40px_rgba(59,130,246,0.2)]" : "shadow-[0_0_20px_rgba(59,130,246,0.05)]"
+              isFocused ? "shadow-[0_0_40px_rgba(201,145,58,0.15)]" : "shadow-[0_4px_24px_rgba(0,0,0,0.08)]"
             }`}>
               <div className="gradient-border rounded-2xl">
-                <div className="flex items-center gap-3 p-2 rounded-2xl bg-[#0f1629]">
+                <div className="flex items-center gap-3 p-2 rounded-2xl bg-white">
                   <div className="pl-4">
-                    <Globe className="w-5 h-5 text-slate-500" />
+                    <Globe className="w-5 h-5 text-stone-400" />
                   </div>
                   <Input
                     type="url"
@@ -65,14 +70,14 @@ export default function InputScreen({ onGenerate }) {
                     onFocus={() => setIsFocused(true)}
                     onBlur={() => setIsFocused(false)}
                     placeholder="Paste your property listing URL here"
-                    className="flex-1 border-0 bg-transparent text-white placeholder:text-slate-500 text-base focus-visible:ring-0 focus-visible:ring-offset-0 h-12"
+                    className="flex-1 border-0 bg-transparent text-stone-900 placeholder:text-stone-400 text-base focus-visible:ring-0 focus-visible:ring-offset-0 h-12"
                   />
                   <Button
                     type="submit"
                     disabled={!url.trim()}
-                    className="h-12 px-6 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-semibold transition-all duration-300 disabled:opacity-40 shadow-lg shadow-blue-500/20"
+                    className="h-12 px-6 rounded-xl bg-stone-900 hover:bg-stone-700 text-white font-semibold transition-all duration-300 disabled:opacity-40 shadow-sm"
                   >
-                    <span className="hidden sm:inline mr-2">Generate Video Reel</span>
+                    <span className="hidden sm:inline mr-2">Generate Reel</span>
                     <span className="sm:hidden mr-2">Generate</span>
                     <ArrowRight className="w-4 h-4" />
                   </Button>
@@ -81,30 +86,34 @@ export default function InputScreen({ onGenerate }) {
             </div>
           </form>
 
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-6">
-            <div className="flex items-center gap-2 text-sm text-slate-400">
-              <Zap className="w-4 h-4 text-yellow-400" />
+          <div className="flex flex-wrap items-center justify-center gap-5 pt-2">
+            <div className="flex items-center gap-2 text-sm text-stone-500">
+              <Zap className="w-4 h-4 text-amber-500" />
               <span>60-second generation</span>
             </div>
-            <div className="flex items-center gap-2 text-sm text-slate-400">
-              <Film className="w-4 h-4 text-purple-400" />
+            <div className="flex items-center gap-2 text-sm text-stone-500">
+              <Film className="w-4 h-4 text-amber-600" />
               <span>9:16 format ready</span>
             </div>
-            <div className="flex items-center gap-2 text-sm text-slate-400">
-              <Video className="w-4 h-4 text-cyan-400" />
-              <span>AI voiceover included</span>
+            <div className="flex items-center gap-2 text-sm text-stone-500">
+              <Video className="w-4 h-4 text-amber-500" />
+              <span>Mia AI voiceover</span>
             </div>
           </div>
         </div>
 
-        <div className="mt-16 max-w-4xl w-full animate-fade-in-up" style={{ animationDelay: "0.3s" }}>
-          <div className="relative rounded-2xl overflow-hidden glass-card p-1">
+        <div className="mt-14 max-w-4xl w-full animate-fade-in-up" style={{ animationDelay: "0.3s" }}>
+          <div className="relative rounded-2xl overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,0.12)] border border-stone-200">
             <img
               src={HERO_IMG}
               alt="Luxury property showcase"
-              className="w-full rounded-xl opacity-80"
+              className="w-full rounded-xl"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0e1a] via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-stone-900/40 via-transparent to-transparent rounded-xl" />
+            <div className="absolute bottom-6 left-6 text-white">
+              <p className="text-xs font-medium uppercase tracking-widest text-white/70 mb-1">Trusted by elite agents</p>
+              <p className="text-sm font-semibold">Sydney · London · Dubai</p>
+            </div>
           </div>
         </div>
       </main>
