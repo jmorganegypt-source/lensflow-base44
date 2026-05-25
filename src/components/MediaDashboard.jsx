@@ -1,8 +1,9 @@
 import { Button } from "@/components/ui/button";
-import { Download, Share2, RotateCcw, Play, Instagram, ExternalLink, Film } from "lucide-react";
+import { Download, Share2, RotateCcw, Play, Instagram, ExternalLink } from "lucide-react";
 import { useState } from "react";
 
-const THUMB_IMG = "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80";
+const LOGO = "https://media.base44.com/images/public/6a1440ebe28bb283cc5442e2/bc7de8a58_logo-lensflow-mark.png";
+const THUMB_IMG = "https://media.base44.com/images/public/6a1440ebe28bb283cc5442e2/814f6e346_sample-video-thumbnail-kitchen.png";
 
 function TikTokIcon({ className }) {
   return (
@@ -35,9 +36,7 @@ export default function MediaDashboard({ listingUrl, onReset }) {
     <div className="min-h-screen flex flex-col">
       <header className="flex items-center justify-between px-8 py-6">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center">
-            <Film className="w-5 h-5 text-white" />
-          </div>
+          <img src={LOGO} alt="LensFlow" className="w-10 h-10" />
           <span className="text-xl font-bold text-white">LensFlow</span>
         </div>
         <Button variant="ghost" onClick={onReset} className="text-slate-400 hover:text-white hover:bg-slate-800">

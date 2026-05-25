@@ -3,7 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Sparkles, ArrowRight, Globe, Zap, Film, Video } from "lucide-react";
 
-const HERO_IMG = "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80";
+const LOGO = "https://media.base44.com/images/public/6a1440ebe28bb283cc5442e2/bc7de8a58_logo-lensflow-mark.png";
+const HERO_IMG = "https://media.base44.com/images/public/6a1440ebe28bb283cc5442e2/f3fcd76f0_hero-luxury-property-twilight.png";
 
 export default function InputScreen({ onGenerate }) {
   const [url, setUrl] = useState("");
@@ -18,9 +19,7 @@ export default function InputScreen({ onGenerate }) {
     <div className="min-h-screen flex flex-col">
       <header className="flex items-center justify-between px-8 py-6">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center">
-            <Film className="w-5 h-5 text-white" />
-          </div>
+          <img src={LOGO} alt="LensFlow" className="w-10 h-10" />
           <span className="text-xl font-bold text-white">LensFlow</span>
         </div>
         <nav className="hidden md:flex items-center gap-8">
