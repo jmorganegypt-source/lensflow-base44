@@ -13,9 +13,9 @@ Deno.serve(async (req) => {
     const base44 = createClientFromRequest(req);
 
     const DID_API_KEY = Deno.env.get("DID_API_KEY");
-    if (!DID_API_KEY) {
-      return Response.json({ error: "Missing DID_API_KEY" }, { status: 500 });
-    }
+    const ELEVENLABS_API_KEY = Deno.env.get("ELEVENLABS_API_KEY");
+    if (!DID_API_KEY) return Response.json({ error: "Missing DID_API_KEY" }, { status: 500 });
+    if (!ELEVENLABS_API_KEY) return Response.json({ error: "Missing ELEVENLABS_API_KEY" }, { status: 500 });
 
     const body = await req.json();
 
@@ -46,8 +46,13 @@ Deno.serve(async (req) => {
           type: "text",
           input: reel.script,
           provider: {
-            type: "microsoft",
-            voice_id: "en-AU-NatashaNeural", // Australian female voice — great for real estate
+            type: "elevenlabs",
+            voice_id: "jRAAK67SEFE9m7ci5DhD", // Oliver
+            voice_config: {
+              api_key: ELEVENLABS_API_KEY,
+              stability: 0.5,
+              similarity_boost: 0.75,
+            },
           },
         },
         config: {
