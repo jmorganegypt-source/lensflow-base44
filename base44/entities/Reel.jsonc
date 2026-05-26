@@ -16,6 +16,8 @@
       "enum": [
         "generating",
         "complete",
+        "rendering",
+        "ready",
         "failed"
       ],
       "default": "generating"
@@ -27,6 +29,10 @@
     "property_address": {
       "type": "string",
       "title": "Property Address"
+    },
+    "heygen_video_id": {
+      "type": "string",
+      "title": "HeyGen Video ID"
     }
   },
   "required": [
