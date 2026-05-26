@@ -1,12 +1,8 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.25';
 
-// Triggered by entity automation when a Reel status becomes "complete".
-// Calls D-ID /talks using Microsoft neural TTS.
-// Once you've created Mia & Oliver in D-ID, replace PRESENTER_IMAGE_URL
-// with the image URL from your D-ID agent/presenter.
-
-// Oliver presenter video (ElevenLabs / Veed)
-const PRESENTER_IMAGE_URL = "https://media.base44.com/videos/public/6a1440ebe28bb283cc5442e2/75db00a9e_ElevenLabs_video_veed-fabric_2026-05-17T17_33_17.mp4";
+// Oliver presenter still image — replace with actual photo if available
+const OLIVER_IMAGE_URL = "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=512&h=512&fit=crop&crop=face";
+const OLIVER_VOICE_ID = "jRAAK67SEFE9m7ci5DhD";
 
 Deno.serve(async (req) => {
   try {
@@ -18,21 +14,56 @@ Deno.serve(async (req) => {
     if (!ELEVENLABS_API_KEY) return Response.json({ error: "Missing ELEVENLABS_API_KEY" }, { status: 500 });
 
     const body = await req.json();
-
-    // Support both entity automation payload and direct call
     const reelId = body?.event?.entity_id || body?.reel_id;
-    if (!reelId) {
-      return Response.json({ error: "Missing reel_id" }, { status: 400 });
-    }
+    if (!reelId) return Response.json({ error: "Missing reel_id" }, { status: 400 });
 
     const reel = await base44.asServiceRole.entities.Reel.get(reelId);
     if (!reel) return Response.json({ error: "Reel not found" }, { status: 404 });
     if (!reel.script) return Response.json({ error: "Reel has no script" }, { status: 400 });
-    if (reel.status !== "complete") {
-      return Response.json({ message: "Reel not in complete status, skipping" });
+    if (reel.status !== "complete") return Response.json({ message: "Reel not in complete status, skipping" });
+
+    // Step 1: Generate audio via ElevenLabs
+    const elevenRes = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${OLIVER_VOICE_ID}`, {
+      method: "POST",
+      headers: {
+        "xi-api-key": ELEVENLABS_API_KEY,
+        "Content-Type": "application/json",
+        "Accept": "audio/mpeg",
+      },
+      body: JSON.stringify({
+        text: reel.script,
+        model_id: "eleven_multilingual_v2",
+        voice_settings: {
+          stability: 0.5,
+          similarity_boost: 0.75,
+        },
+      }),
+    });
+
+    if (!elevenRes.ok) {
+      const err = await elevenRes.text();
+      console.error("ElevenLabs error:", err);
+      await base44.asServiceRole.entities.Reel.update(reelId, { status: "failed" });
+      return Response.json({ error: "ElevenLabs error: " + err }, { status: 500 });
     }
 
-    // Submit to D-ID using Microsoft neural TTS (no external integrations required)
+    // Step 2: Upload audio to Base44 public storage
+    const audioBuffer = await elevenRes.arrayBuffer();
+    const audioBlob = new Blob([audioBuffer], { type: "audio/mpeg" });
+    const formData = new FormData();
+    formData.append("file", audioBlob, "oliver_audio.mp3");
+
+    const uploadRes = await base44.asServiceRole.integrations.Core.UploadFile({ file: audioBlob });
+    const audioUrl = uploadRes?.file_url;
+
+    if (!audioUrl) {
+      await base44.asServiceRole.entities.Reel.update(reelId, { status: "failed" });
+      return Response.json({ error: "Failed to upload audio" }, { status: 500 });
+    }
+
+    console.log("Audio uploaded:", audioUrl);
+
+    // Step 3: Submit to D-ID with audio URL
     const didRes = await fetch("https://api.d-id.com/talks", {
       method: "POST",
       headers: {
@@ -41,19 +72,10 @@ Deno.serve(async (req) => {
         "Accept": "application/json",
       },
       body: JSON.stringify({
-        source_url: PRESENTER_IMAGE_URL,
+        source_url: OLIVER_IMAGE_URL,
         script: {
-          type: "text",
-          input: reel.script,
-          provider: {
-            type: "elevenlabs",
-            voice_id: "jRAAK67SEFE9m7ci5DhD", // Oliver
-            voice_config: {
-              api_key: ELEVENLABS_API_KEY,
-              stability: 0.5,
-              similarity_boost: 0.75,
-            },
-          },
+          type: "audio",
+          audio_url: audioUrl,
         },
         config: {
           fluent: true,
@@ -66,7 +88,7 @@ Deno.serve(async (req) => {
     const didData = await didRes.json();
 
     if (!didRes.ok) {
-      console.error("D-ID API full error:", JSON.stringify(didData));
+      console.error("D-ID API error:", JSON.stringify(didData));
       const errMsg = didData?.description || didData?.message || JSON.stringify(didData);
       await base44.asServiceRole.entities.Reel.update(reelId, { status: "failed" });
       return Response.json({ error: "D-ID error: " + errMsg }, { status: 500 });
