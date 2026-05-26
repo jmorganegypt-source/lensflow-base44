@@ -10,10 +10,20 @@ export default function SalesRepPortal() {
   const [showForm, setShowForm] = useState(false);
   const [syncing, setSyncing] = useState(null);
   const [hubspotConnected, setHubspotConnected] = useState(false);
+  const [user, setUser] = useState(null);
+  const [authChecking, setAuthChecking] = useState(true);
 
   useEffect(() => {
-    fetchCustomers();
-    checkHubspotConnection();
+    const init = async () => {
+      const currentUser = await base44.auth.me();
+      setUser(currentUser);
+      setAuthChecking(false);
+      if (currentUser) {
+        fetchCustomers();
+        checkHubspotConnection();
+      }
+    };
+    init();
   }, []);
 
   const fetchCustomers = async () => {
@@ -75,7 +85,7 @@ export default function SalesRepPortal() {
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-4xl font-bold" style={{ color: '#0a0e1a' }}>Customer Cards</h1>
           <div className="flex gap-3">
-            {!hubspotConnected && (
+            {user && !hubspotConnected && (
               <button
                 onClick={handleConnectHubspot}
                 className="px-6 py-3 rounded-lg font-semibold text-white"
@@ -84,7 +94,7 @@ export default function SalesRepPortal() {
                 🔵 Connect HubSpot
               </button>
             )}
-            {hubspotConnected && (
+            {user && hubspotConnected && (
               <button
                 onClick={handleDisconnectHubspot}
                 className="px-6 py-3 rounded-lg font-semibold text-white"
@@ -103,13 +113,26 @@ export default function SalesRepPortal() {
           </div>
         </div>
 
-        {showForm && (
-          <div className="mb-8">
-            <CustomerForm onSuccess={handleCustomerCreated} />
-          </div>
-        )}
-
-        {loading ? (
+        {authChecking ? (
+        <div className="text-center py-12">
+          <div className="w-8 h-8 border-4 border-slate-200 border-t-slate-800 rounded-full animate-spin mx-auto"></div>
+        </div>
+      ) : !user ? (
+        <div className="text-center py-12 bg-white rounded-lg border border-slate-200">
+          <p className="text-slate-500 mb-4">Please log in to access the Sales Rep Portal.</p>
+          <button
+            onClick={() => base44.auth.redirectToLogin()}
+            className="px-6 py-3 rounded-lg font-semibold text-white"
+            style={{ background: '#C99A2E' }}
+          >
+            Log In
+          </button>
+        </div>
+      ) : showForm ? (
+        <div className="mb-8">
+          <CustomerForm onSuccess={handleCustomerCreated} />
+        </div>
+      ) : loading ? (
           <div className="text-center py-12">
             <div className="w-8 h-8 border-4 border-slate-200 border-t-slate-800 rounded-full animate-spin mx-auto"></div>
           </div>
