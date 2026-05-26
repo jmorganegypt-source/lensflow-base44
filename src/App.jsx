@@ -5,7 +5,11 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
-import Index from './pages/Index';
+import Home from './pages/Home';
+import Presenters from './pages/Presenters';
+import Pricing from './pages/Pricing';
+import Compare from './pages/Compare';
+import Generate from './pages/Generate';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -33,7 +37,11 @@ const AuthenticatedApp = () => {
   // Render the main app
   return (
     <Routes>
-      <Route path="/" element={<Index />} />
+      <Route path="/" element={<Home />} />
+      <Route path="/presenters" element={<Presenters />} />
+      <Route path="/pricing" element={<Pricing />} />
+      <Route path="/compare" element={<Compare />} />
+      <Route path="/generate" element={<Generate />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
