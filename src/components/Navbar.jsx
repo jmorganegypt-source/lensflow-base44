@@ -18,6 +18,7 @@ export default function Navbar() {
         <Link to="/compare" className="text-sm text-white/60 hover:text-white transition-colors">Compare</Link>
         <Link to="/how-it-works" className="text-sm text-white/60 hover:text-white transition-colors">How It Works</Link>
         <a href="https://www.lensflow.com.au/done-for-you" target="_blank" rel="noopener noreferrer" className="text-sm text-white/60 hover:text-white transition-colors">Done-for-You</a>
+        <Link to="/dashboard" className="text-sm text-white/60 hover:text-white transition-colors">Dashboard</Link>
         <a href="https://www.lensflow.com.au/login" className="text-sm text-white/60 hover:text-white transition-colors">Sign In</a>
         <Link to="/generate">
           <button className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all" style={{ background: "#C99A2E", color: "#0a0e1a" }}>

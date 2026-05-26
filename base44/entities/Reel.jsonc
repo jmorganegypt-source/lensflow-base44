@@ -1,0 +1,35 @@
+{
+  "name": "Reel",
+  "type": "object",
+  "properties": {
+    "listing_url": {
+      "type": "string",
+      "title": "Listing URL"
+    },
+    "script": {
+      "type": "string",
+      "title": "Script"
+    },
+    "status": {
+      "type": "string",
+      "title": "Status",
+      "enum": [
+        "generating",
+        "complete",
+        "failed"
+      ],
+      "default": "generating"
+    },
+    "video_url": {
+      "type": "string",
+      "title": "Video URL"
+    },
+    "property_address": {
+      "type": "string",
+      "title": "Property Address"
+    }
+  },
+  "required": [
+    "listing_url"
+  ]
+}

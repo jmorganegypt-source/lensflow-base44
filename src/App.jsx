@@ -11,6 +11,11 @@ import Presenters from './pages/Presenters';
 import Pricing from './pages/Pricing';
 import Compare from './pages/Compare';
 import Generate from './pages/Generate';
+import DashboardLayout from './components/DashboardLayout';
+import DashboardHome from './pages/DashboardHome';
+import MyReels from './pages/MyReels';
+import Billing from './pages/Billing';
+import DashboardSettings from './pages/DashboardSettings';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -42,8 +47,14 @@ const AuthenticatedApp = () => {
       <Route path="/presenters" element={<Presenters />} />
       <Route path="/pricing" element={<Pricing />} />
       <Route path="/compare" element={<Compare />} />
-      <Route path="/generate" element={<Generate />} />
       <Route path="/how-it-works" element={<HowItWorks />} />
+      <Route path="/generate" element={<Generate />} />
+      <Route element={<DashboardLayout />}>
+        <Route path="/dashboard" element={<DashboardHome />} />
+        <Route path="/dashboard/reels" element={<MyReels />} />
+        <Route path="/dashboard/billing" element={<Billing />} />
+        <Route path="/dashboard/settings" element={<DashboardSettings />} />
+      </Route>
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
