@@ -66,8 +66,8 @@ Deno.serve(async (req) => {
     const didData = await didRes.json();
 
     if (!didRes.ok) {
+      console.error("D-ID API full error:", JSON.stringify(didData));
       const errMsg = didData?.description || didData?.message || JSON.stringify(didData);
-      console.error("D-ID API error:", errMsg);
       await base44.asServiceRole.entities.Reel.update(reelId, { status: "failed" });
       return Response.json({ error: "D-ID error: " + errMsg }, { status: 500 });
     }
