@@ -13,8 +13,8 @@ export default function Generate() {
     setCurrentView("progress");
   };
 
-  const handleComplete = async () => {
-    base44.entities.Reel.create({ listing_url: listingUrl, status: "complete" });
+  const handleComplete = async (script) => {
+    base44.entities.Reel.create({ listing_url: listingUrl, status: "complete", script: script || "" });
     setCurrentView("media");
   };
 

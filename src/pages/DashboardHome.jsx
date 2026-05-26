@@ -11,7 +11,7 @@ export default function DashboardHome() {
   useEffect(() => {
     Promise.all([
       base44.auth.me(),
-      base44.entities.Reel.list("-created_date", 5),
+      base44.entities.Reel.list("-created_date", 500),
     ]).then(([u, r]) => {
       setUser(u);
       setReels(r);

@@ -81,7 +81,7 @@ export default function ProgressView({ listingUrl, onComplete }) {
     if (phase !== "post_script") return;
 
     if (postScriptStep >= PIPELINE_STEPS.length) {
-      const timeout = setTimeout(onComplete, 800);
+      const timeout = setTimeout(() => onComplete(generatedScript), 800);
       return () => clearTimeout(timeout);
     }
 
@@ -107,8 +107,8 @@ export default function ProgressView({ listingUrl, onComplete }) {
     return () => clearInterval(timer);
   }, [phase, postScriptStep, onComplete]);
 
-  const handleApproveScript = (script) => {
-    setGeneratedScript(script);
+  const handleApproveScript = (approvedScript) => {
+    setGeneratedScript(approvedScript);
     setPhase("post_script");
     setPostScriptStep(1);
     setPostScriptProgress(0);

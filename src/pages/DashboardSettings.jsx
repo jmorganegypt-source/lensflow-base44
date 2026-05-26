@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
-import { User, Save } from "lucide-react";
+import { User, Save, Building2, Phone } from "lucide-react";
 
 export default function DashboardSettings() {
   const [user, setUser] = useState(null);
   const [name, setName] = useState("");
+  const [agency, setAgency] = useState("");
+  const [phone, setPhone] = useState("");
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
 
@@ -12,12 +14,14 @@ export default function DashboardSettings() {
     base44.auth.me().then((u) => {
       setUser(u);
       setName(u?.full_name || "");
+      setAgency(u?.agency_name || "");
+      setPhone(u?.phone || "");
     });
   }, []);
 
   const handleSave = async () => {
     setSaving(true);
-    await base44.auth.updateMe({ full_name: name });
+    await base44.auth.updateMe({ full_name: name, agency_name: agency, phone });
     setSaving(false);
     setSaved(true);
     setTimeout(() => setSaved(false), 2000);
@@ -47,6 +51,36 @@ export default function DashboardSettings() {
             className="w-full px-4 py-2.5 rounded-xl text-sm text-white border border-white/10 focus:outline-none focus:border-[#C99A2E]/40 transition-colors"
             style={{ background: "rgba(255,255,255,0.05)" }}
           />
+        </div>
+
+        <div className="space-y-1">
+          <label className="text-xs text-white/40 uppercase tracking-wider">Agency Name</label>
+          <div className="relative">
+            <Building2 className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-white/25" />
+            <input
+              type="text"
+              value={agency}
+              onChange={(e) => setAgency(e.target.value)}
+              placeholder="e.g. Ray White Sydney"
+              className="w-full pl-10 pr-4 py-2.5 rounded-xl text-sm text-white border border-white/10 focus:outline-none focus:border-[#C99A2E]/40 transition-colors placeholder:text-white/20"
+              style={{ background: "rgba(255,255,255,0.05)" }}
+            />
+          </div>
+        </div>
+
+        <div className="space-y-1">
+          <label className="text-xs text-white/40 uppercase tracking-wider">Phone Number</label>
+          <div className="relative">
+            <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-white/25" />
+            <input
+              type="tel"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              placeholder="e.g. 0400 000 000"
+              className="w-full pl-10 pr-4 py-2.5 rounded-xl text-sm text-white border border-white/10 focus:outline-none focus:border-[#C99A2E]/40 transition-colors placeholder:text-white/20"
+              style={{ background: "rgba(255,255,255,0.05)" }}
+            />
+          </div>
         </div>
 
         <div className="space-y-1">

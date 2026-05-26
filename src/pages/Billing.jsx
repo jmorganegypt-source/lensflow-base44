@@ -59,7 +59,7 @@ export default function Billing() {
               <p className="text-white/40 text-sm mt-0.5">{user?.email}</p>
             </div>
           </div>
-          <a href="https://billing.stripe.com" target="_blank" rel="noopener noreferrer">
+          <a href="https://billing.stripe.com/p/login/test_00000" target="_blank" rel="noopener noreferrer">
             <button className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm border border-white/12 text-white/70 hover:border-white/25 hover:text-white transition-all">
               <ExternalLink className="w-4 h-4" />
               Manage in Stripe

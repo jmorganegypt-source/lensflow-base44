@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { Download, Share2, RotateCcw, Play, Instagram, ExternalLink } from "lucide-react";
+import { Download, Share2, RotateCcw, Play, Instagram, ExternalLink, LayoutDashboard } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const LOGO = "https://media.base44.com/images/public/6a1440ebe28bb283cc5442e2/da745320e_logo-lensflow-mark.png";
 const THUMB_IMG = "https://media.base44.com/images/public/6a1440ebe28bb283cc5442e2/146903c3c_hero-luxury-property-twilight.png";
@@ -109,6 +110,10 @@ export default function MediaDashboard({ listingUrl, onReset }) {
               <Share2 className="w-5 h-5" />
               Copy Share Link
             </button>
+            <Link to="/dashboard/reels" className="w-full h-12 rounded-full inline-flex items-center justify-center gap-2 border border-[#C99A2E]/40 text-[#C99A2E] font-medium hover:bg-[#C99A2E]/8 transition-all">
+              <LayoutDashboard className="w-5 h-5" />
+              View in My Dashboard
+            </Link>
           </div>
 
           <div className="space-y-3">

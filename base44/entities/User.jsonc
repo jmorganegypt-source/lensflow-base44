@@ -1,0 +1,33 @@
+{
+  "name": "User",
+  "type": "object",
+  "properties": {
+    "role": {
+      "type": "string",
+      "enum": [
+        "admin",
+        "user"
+      ],
+      "default": "user"
+    },
+    "agency_name": {
+      "type": "string",
+      "title": "Agency Name"
+    },
+    "phone": {
+      "type": "string",
+      "title": "Phone Number"
+    },
+    "subscription_plan": {
+      "type": "string",
+      "title": "Subscription Plan",
+      "enum": [
+        "free",
+        "starter",
+        "elite",
+        "concierge"
+      ],
+      "default": "free"
+    }
+  }
+}
