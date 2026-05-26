@@ -22,7 +22,7 @@ export default function Navbar() {
         <a href="https://www.lensflow.com.au/login" className="text-sm text-white/60 hover:text-white transition-colors">Sign In</a>
         <Link to="/generate">
           <button className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all" style={{ background: "#C99A2E", color: "#0a0e1a" }}>
-            Start Recording
+            Generate Your Reel Free
           </button>
         </Link>
       </nav>
@@ -30,7 +30,7 @@ export default function Navbar() {
       {/* Mobile */}
       <Link to="/generate" className="md:hidden">
         <button className="px-4 py-2 rounded-full text-sm font-medium" style={{ background: "#C99A2E", color: "#0a0e1a" }}>
-          Start Recording
+          Generate Reel Free
         </button>
       </Link>
     </header>
