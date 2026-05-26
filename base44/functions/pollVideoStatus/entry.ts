@@ -1,19 +1,18 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.25';
 
 // Scheduled every 5 minutes.
-// Finds all reels with status "rendering", checks HeyGen for completion,
-// and updates status to "ready" with the signed download URL.
+// Checks D-ID status for all "rendering" reels.
+// On completion → sets status to "ready" + saves the signed video_url.
 
 Deno.serve(async (req) => {
   try {
     const base44 = createClientFromRequest(req);
 
-    const HEYGEN_API_KEY = Deno.env.get("HEYGEN_API_KEY");
-    if (!HEYGEN_API_KEY) {
-      return Response.json({ error: "HEYGEN_API_KEY not set" }, { status: 500 });
+    const DID_API_KEY = Deno.env.get("DID_API_KEY");
+    if (!DID_API_KEY) {
+      return Response.json({ error: "DID_API_KEY not set" }, { status: 500 });
     }
 
-    // Fetch all reels currently rendering
     const renderingReels = await base44.asServiceRole.entities.Reel.filter({ status: "rendering" });
 
     if (!renderingReels || renderingReels.length === 0) {
@@ -22,47 +21,47 @@ Deno.serve(async (req) => {
     }
 
     console.log(`Polling ${renderingReels.length} rendering reel(s)...`);
-
     const results = [];
 
     for (const reel of renderingReels) {
-      if (!reel.heygen_video_id) {
-        console.warn(`Reel ${reel.id} has no heygen_video_id, skipping.`);
+      if (!reel.did_video_id) {
+        console.warn(`Reel ${reel.id} has no did_video_id, skipping.`);
         continue;
       }
 
       try {
-        const statusRes = await fetch(
-          `https://api.heygen.com/v1/video_status.get?video_id=${reel.heygen_video_id}`,
-          {
-            headers: { "X-Api-Key": HEYGEN_API_KEY },
-          }
-        );
+        const statusRes = await fetch(`https://api.d-id.com/talks/${reel.did_video_id}`, {
+          headers: {
+            "Authorization": `Basic ${DID_API_KEY}`,
+            "Accept": "application/json",
+          },
+        });
 
         const statusData = await statusRes.json();
-        const videoStatus = statusData?.data?.status;
-        const videoUrl = statusData?.data?.video_url;
-        const thumbnailUrl = statusData?.data?.thumbnail_url;
+        const talkStatus = statusData?.status;
+        const videoUrl = statusData?.result_url;
 
-        console.log(`Reel ${reel.id} (HeyGen ${reel.heygen_video_id}): ${videoStatus}`);
+        console.log(`Reel ${reel.id} (D-ID ${reel.did_video_id}): ${talkStatus}`);
 
-        if (videoStatus === "completed" && videoUrl) {
+        if (talkStatus === "done" && videoUrl) {
           await base44.asServiceRole.entities.Reel.update(reel.id, {
             status: "ready",
             video_url: videoUrl,
           });
           results.push({ reel_id: reel.id, status: "ready", video_url: videoUrl });
-          console.log(`Reel ${reel.id} is now READY. URL: ${videoUrl}`);
-        } else if (videoStatus === "failed") {
-          await base44.asServiceRole.entities.Reel.update(reel.id, {
-            status: "failed",
-          });
-          results.push({ reel_id: reel.id, status: "failed" });
-          console.log(`Reel ${reel.id} FAILED in HeyGen.`);
+          console.log(`Reel ${reel.id} is READY. URL: ${videoUrl}`);
+
+        } else if (talkStatus === "error") {
+          const errMsg = statusData?.error?.description || "Unknown D-ID error";
+          console.error(`Reel ${reel.id} FAILED: ${errMsg}`);
+          await base44.asServiceRole.entities.Reel.update(reel.id, { status: "failed" });
+          results.push({ reel_id: reel.id, status: "failed", error: errMsg });
+
         } else {
-          // Still processing (pending / processing)
-          results.push({ reel_id: reel.id, status: videoStatus });
+          // Still in progress (created / started)
+          results.push({ reel_id: reel.id, status: talkStatus });
         }
+
       } catch (err) {
         console.error(`Error polling reel ${reel.id}:`, err.message);
         results.push({ reel_id: reel.id, error: err.message });

@@ -30,9 +30,9 @@
       "type": "string",
       "title": "Property Address"
     },
-    "heygen_video_id": {
+    "did_video_id": {
       "type": "string",
-      "title": "HeyGen Video ID"
+      "title": "D-ID Talk ID"
     }
   },
   "required": [
