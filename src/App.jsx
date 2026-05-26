@@ -16,6 +16,7 @@ import DashboardHome from './pages/DashboardHome';
 import MyReels from './pages/MyReels';
 import Billing from './pages/Billing';
 import DashboardSettings from './pages/DashboardSettings';
+import SalesRepPortal from './pages/SalesRepPortal';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -55,6 +56,7 @@ const AuthenticatedApp = () => {
         <Route path="/dashboard/billing" element={<Billing />} />
         <Route path="/dashboard/settings" element={<DashboardSettings />} />
       </Route>
+      <Route path="/sales-rep-portal" element={<SalesRepPortal />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );

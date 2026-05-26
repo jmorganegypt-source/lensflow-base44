@@ -1,0 +1,51 @@
+{
+  "name": "Customer",
+  "type": "object",
+  "properties": {
+    "customer_name": {
+      "type": "string",
+      "title": "Customer Name"
+    },
+    "email": {
+      "type": "string",
+      "title": "Email"
+    },
+    "phone": {
+      "type": "string",
+      "title": "Phone Number"
+    },
+    "property_address": {
+      "type": "string",
+      "title": "Property Address"
+    },
+    "photos_urls": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Photo URLs"
+    },
+    "videos_urls": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "title": "Video URLs"
+    },
+    "hubspot_contact_id": {
+      "type": "string",
+      "title": "HubSpot Contact ID"
+    },
+    "synced_to_hubspot": {
+      "type": "boolean",
+      "title": "Synced to HubSpot",
+      "default": false
+    }
+  },
+  "required": [
+    "customer_name",
+    "email",
+    "phone",
+    "property_address"
+  ]
+}
