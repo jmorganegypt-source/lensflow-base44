@@ -20,7 +20,6 @@ export default function SalesRepPortal() {
       setAuthChecking(false);
       if (currentUser) {
         fetchCustomers();
-        checkHubspotConnection();
       }
     };
     init();
@@ -43,22 +42,13 @@ export default function SalesRepPortal() {
     fetchCustomers();
   };
 
-  const checkHubspotConnection = async () => {
-    try {
-      const url = await base44.connectors.connectAppUser('6a158d724efc9633889457e2');
-      setHubspotConnected(!!url);
-    } catch {
-      setHubspotConnected(false);
-    }
-  };
-
   const handleConnectHubspot = async () => {
     const url = await base44.connectors.connectAppUser('6a158d724efc9633889457e2');
     const popup = window.open(url, '_blank');
     const timer = setInterval(() => {
       if (!popup || popup.closed) {
         clearInterval(timer);
-        checkHubspotConnection();
+        setHubspotConnected(true);
       }
     }, 500);
   };
