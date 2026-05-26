@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import DemoClipsSection from "../components/DemoClipsSection";
+import DashboardTutorial from "../components/DashboardTutorial";
 import { ArrowRight, Check, Star, Zap, Film, Camera, Sparkles } from "lucide-react";
 
 const MIA = "https://lensflow.com.au/assets/property/mia-headshot.jpg";
@@ -255,6 +256,7 @@ export default function Home() {
         </div>
       </section>
 
+      <DashboardTutorial />
       <DemoClipsSection />
       <Footer />
     </div>
