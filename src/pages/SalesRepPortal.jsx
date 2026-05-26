@@ -9,9 +9,11 @@ export default function SalesRepPortal() {
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [syncing, setSyncing] = useState(null);
+  const [hubspotConnected, setHubspotConnected] = useState(false);
 
   useEffect(() => {
     fetchCustomers();
+    checkHubspotConnection();
   }, []);
 
   const fetchCustomers = async () => {
@@ -31,6 +33,31 @@ export default function SalesRepPortal() {
     fetchCustomers();
   };
 
+  const checkHubspotConnection = async () => {
+    try {
+      const url = await base44.connectors.connectAppUser('6a158d724efc9633889457e2');
+      setHubspotConnected(!!url);
+    } catch {
+      setHubspotConnected(false);
+    }
+  };
+
+  const handleConnectHubspot = async () => {
+    const url = await base44.connectors.connectAppUser('6a158d724efc9633889457e2');
+    const popup = window.open(url, '_blank');
+    const timer = setInterval(() => {
+      if (!popup || popup.closed) {
+        clearInterval(timer);
+        checkHubspotConnection();
+      }
+    }, 500);
+  };
+
+  const handleDisconnectHubspot = async () => {
+    await base44.connectors.disconnectAppUser('6a158d724efc9633889457e2');
+    setHubspotConnected(false);
+  };
+
   const handleSyncToCRM = async (customer) => {
     setSyncing(customer.id);
     try {
@@ -47,13 +74,33 @@ export default function SalesRepPortal() {
       <div className="max-w-6xl mx-auto">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-4xl font-bold" style={{ color: '#0a0e1a' }}>Customer Cards</h1>
-          <button
-            onClick={() => setShowForm(!showForm)}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-white"
-            style={{ background: '#C99A2E' }}
-          >
-            <Plus className="w-5 h-5" /> New Customer
-          </button>
+          <div className="flex gap-3">
+            {!hubspotConnected && (
+              <button
+                onClick={handleConnectHubspot}
+                className="px-6 py-3 rounded-lg font-semibold text-white"
+                style={{ background: '#3b82f6' }}
+              >
+                🔵 Connect HubSpot
+              </button>
+            )}
+            {hubspotConnected && (
+              <button
+                onClick={handleDisconnectHubspot}
+                className="px-6 py-3 rounded-lg font-semibold text-white"
+                style={{ background: '#ef4444' }}
+              >
+                ✓ HubSpot Connected
+              </button>
+            )}
+            <button
+              onClick={() => setShowForm(!showForm)}
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-white"
+              style={{ background: '#C99A2E' }}
+            >
+              <Plus className="w-5 h-5" /> New Customer
+            </button>
+          </div>
         </div>
 
         {showForm && (
