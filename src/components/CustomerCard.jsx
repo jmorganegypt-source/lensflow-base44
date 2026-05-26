@@ -52,7 +52,7 @@ export default function CustomerCard({ customer, onDelete, onSync, syncing }) {
         <p className="text-xs font-mono uppercase tracking-widest text-slate-400 mb-2">CRM</p>
         <div className="flex items-center justify-between">
           <p className="text-sm font-medium capitalize">
-            {customer.crm_type === 'none' ? '📦 Local Storage' : customer.crm_type === 'hubspot' ? '🔵 HubSpot' : '☁️ Salesforce'}
+            {customer.crm_type === 'none' ? '📦 Local Storage' : '🔵 HubSpot'}
           </p>
           {customer.crm_type !== 'none' && (
             <span style={{ color: customer.synced_to_crm ? '#22c55e' : '#ef4444' }} className="text-xs font-medium">

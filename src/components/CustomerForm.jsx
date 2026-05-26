@@ -107,7 +107,6 @@ export default function CustomerForm({ onSuccess }) {
           >
             <option value="none">No CRM (Local Storage Only)</option>
             <option value="hubspot">HubSpot</option>
-            <option value="salesforce">Salesforce</option>
           </select>
         </div>
         <div>

@@ -34,7 +34,7 @@ export default function SalesRepPortal() {
   const handleSyncToCRM = async (customer) => {
     setSyncing(customer.id);
     try {
-      await base44.functions.invoke('syncToCRM', { customerId: customer.id });
+      await base44.functions.invoke('syncToCRMAppUser', { customerId: customer.id });
       fetchCustomers();
     } catch (error) {
       console.error('Sync failed:', error);
