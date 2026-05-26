@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { base44 } from "@/api/base44Client";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Check, Crown, Sparkles, Star } from "lucide-react";
@@ -7,9 +9,9 @@ const PLANS = [
   {
     name: "Starter",
     price: "$79",
+    plan: "starter",
     tagline: "The sole performer. Film yourself, beautifully — Mia writes the script.",
     cta: "Start 7-day trial",
-    ctaHref: "https://www.lensflow.com.au/register",
     features: [
       "Pro AI Teleprompter · perfect eye-contact",
       "Mia — your AI script writer + presenter",
@@ -25,7 +27,7 @@ const PLANS = [
     price: "$199",
     tagline: "Mia & Oliver are your AI presenters. You don't film a thing.",
     cta: "Start 7-day trial",
-    ctaHref: "https://www.lensflow.com.au/register",
+    plan: "elite",
     popular: true,
     features: [
       "Everything in Starter",
@@ -43,7 +45,7 @@ const PLANS = [
     price: "$399",
     tagline: "Virtual Twin. Bespoke avatar trained on you. Total automation.",
     cta: "Begin VIP intake",
-    ctaHref: "https://www.lensflow.com.au/done-for-you",
+    plan: "concierge",
     features: [
       "Everything in Elite",
       "Custom AI presenter trained on YOUR face",
@@ -76,7 +78,20 @@ function Cell({ val }) {
   return <span className="text-sm text-white/60">{val}</span>;
 }
 
+async function startCheckout(plan) {
+  const res = await base44.functions.invoke('createCheckoutSession', { plan });
+  if (res.data?.url) window.location.href = res.data.url;
+  else alert(res.data?.error || 'Could not start checkout. Please try again.');
+}
+
 export default function Pricing() {
+  const [loadingPlan, setLoadingPlan] = useState(null);
+
+  const handleCheckout = async (plan) => {
+    setLoadingPlan(plan);
+    await startCheckout(plan);
+    setLoadingPlan(null);
+  };
   return (
     <div className="min-h-screen" style={{ background: "#0a0e1a", color: "#f8fafc" }}>
       <Navbar />
@@ -115,11 +130,16 @@ export default function Pricing() {
                 <span className="text-white/40 text-sm"> AUD / month</span>
               </div>
               <p className="text-xs font-mono uppercase tracking-widest mb-5" style={{ color: "#C99A2E" }}>7-day free trial</p>
-              <a href={plan.ctaHref} className="mb-6">
-                <button className={`w-full py-3 rounded-xl text-sm font-semibold transition-all ${plan.popular ? "hover:opacity-90" : "border border-white/15 text-white hover:border-white/30"}`} style={plan.popular ? { background: "#C99A2E", color: "#0a0e1a" } : {}}>
-                  {plan.cta}
+              <div className="mb-6">
+                <button
+                  onClick={() => handleCheckout(plan.plan)}
+                  disabled={loadingPlan === plan.plan}
+                  className={`w-full py-3 rounded-xl text-sm font-semibold transition-all disabled:opacity-60 ${plan.popular ? "hover:opacity-90" : "border border-white/15 text-white hover:border-white/30"}`}
+                  style={plan.popular ? { background: "#C99A2E", color: "#0a0e1a" } : {}}
+                >
+                  {loadingPlan === plan.plan ? "Redirecting to Stripe…" : plan.cta}
                 </button>
-              </a>
+              </div>
               <ul className="space-y-2.5 mt-auto">
                 {plan.features.map((f) => (
                   <li key={f} className="flex items-start gap-2.5 text-sm text-white/70">
@@ -186,12 +206,15 @@ export default function Pricing() {
           <Star className="w-8 h-8 mx-auto mb-4" style={{ color: "#C99A2E" }} />
           <h3 className="text-2xl font-bold mb-3">Our 20% guarantee.</h3>
           <p className="text-white/60 leading-relaxed mb-6">Show us a comparable quote from <em>any</em> AI video tool — BIGVU, Synthesia, HeyGen, Pictory, anyone — and we'll beat it by 20%, <strong className="text-white">locked in for 12 months</strong>.</p>
-          <a href="https://www.lensflow.com.au/register">
-            <button className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm transition-all hover:opacity-90" style={{ background: "#C99A2E", color: "#0a0e1a" }}>
-              <Sparkles className="w-4 h-4" />
-              Start your 7-day free trial
-            </button>
-          </a>
+          <button
+            onClick={() => handleCheckout('starter')}
+            disabled={loadingPlan === 'starter'}
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm transition-all hover:opacity-90 disabled:opacity-60"
+            style={{ background: "#C99A2E", color: "#0a0e1a" }}
+          >
+            <Sparkles className="w-4 h-4" />
+            {loadingPlan === 'starter' ? 'Redirecting…' : 'Start your 7-day free trial'}
+          </button>
         </div>
       </section>
 
