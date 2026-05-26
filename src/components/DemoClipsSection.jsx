@@ -72,12 +72,8 @@ function LensFlowClip() {
         <img src={MIA_IMG} alt="Mia" className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[78%] object-contain z-10" style={{ filter: "drop-shadow(0 10px 20px rgba(0,0,0,0.5))" }} />
 
         {/* Logo */}
-        <div className="absolute top-3 left-0 right-0 flex flex-col items-center z-20">
-          <div className="flex items-center gap-1">
-            <span className="text-white font-bold text-xs tracking-widest" style={{ fontFamily: "serif", letterSpacing: "0.15em" }}>LENSFLOW</span>
-            <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-sm text-black" style={{ background: "#C99A2E" }}>PRO</span>
-          </div>
-          <span className="text-[9px] tracking-widest text-white/60 mt-0.5">ELITE ACCESS</span>
+        <div className="absolute top-3 left-0 right-0 flex items-center justify-center z-20">
+          <img src="https://media.base44.com/images/public/6a1440ebe28bb283cc5442e2/7ca147aa6_generated_image.png" alt="LensFlow" className="h-6 w-auto" />
         </div>
 
         {/* Teleprompter overlay — bottom */}

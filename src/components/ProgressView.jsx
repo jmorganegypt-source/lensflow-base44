@@ -3,7 +3,7 @@ import { Check, Loader2, Globe, Mic, Film } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import ScriptEditor from "./ScriptEditor";
 
-const LOGO = "https://media.base44.com/images/public/6a1440ebe28bb283cc5442e2/da745320e_logo-lensflow-mark.png";
+const LOGO = "https://media.base44.com/images/public/6a1440ebe28bb283cc5442e2/7ca147aa6_generated_image.png";
 
 // Steps shown in the progress bar (script generation is a separate UI state)
 const PIPELINE_STEPS = [
