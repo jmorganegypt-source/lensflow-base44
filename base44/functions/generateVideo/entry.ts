@@ -1,6 +1,7 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.25';
 
-// Oliver presenter still image — replace with actual photo if available
+// Oliver presenter image — a neutral still for D-ID lip-sync
+// Replace with an actual headshot of Oliver if available
 const OLIVER_IMAGE_URL = "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=512&h=512&fit=crop&crop=face";
 const OLIVER_VOICE_ID = "jRAAK67SEFE9m7ci5DhD";
 
@@ -22,54 +23,7 @@ Deno.serve(async (req) => {
     if (!reel.script) return Response.json({ error: "Reel has no script" }, { status: 400 });
     if (reel.status !== "complete") return Response.json({ message: "Reel not in complete status, skipping" });
 
-    // Step 1: Generate audio via ElevenLabs
-    const elevenRes = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${OLIVER_VOICE_ID}`, {
-      method: "POST",
-      headers: {
-        "xi-api-key": ELEVENLABS_API_KEY,
-        "Content-Type": "application/json",
-        "Accept": "audio/mpeg",
-      },
-      body: JSON.stringify({
-        text: reel.script,
-        model_id: "eleven_multilingual_v2",
-        voice_settings: {
-          stability: 0.5,
-          similarity_boost: 0.75,
-        },
-      }),
-    });
-
-    if (!elevenRes.ok) {
-      const err = await elevenRes.text();
-      console.error("ElevenLabs error:", err);
-      await base44.asServiceRole.entities.Reel.update(reelId, { status: "failed" });
-      return Response.json({ error: "ElevenLabs error: " + err }, { status: 500 });
-    }
-
-    // Step 2: Upload audio to D-ID's /audios endpoint
-    const audioBuffer = await elevenRes.arrayBuffer();
-    const audioBlob = new Blob([audioBuffer], { type: "audio/mpeg" });
-    const audioForm = new FormData();
-    audioForm.append("audio", audioBlob, "oliver_audio.mp3");
-
-    const audioUploadRes = await fetch("https://api.d-id.com/audios", {
-      method: "POST",
-      headers: { "Authorization": `Basic ${DID_API_KEY}` },
-      body: audioForm,
-    });
-
-    const audioUploadData = await audioUploadRes.json();
-    if (!audioUploadRes.ok) {
-      console.error("D-ID audio upload error:", JSON.stringify(audioUploadData));
-      await base44.asServiceRole.entities.Reel.update(reelId, { status: "failed" });
-      return Response.json({ error: "D-ID audio upload error: " + JSON.stringify(audioUploadData) }, { status: 500 });
-    }
-
-    const audioUrl = audioUploadData?.url;
-    console.log("Audio uploaded to D-ID:", audioUrl);
-
-    // Step 3: Submit to D-ID with audio URL
+    // Submit to D-ID using ElevenLabs provider with Oliver's voice
     const didRes = await fetch("https://api.d-id.com/talks", {
       method: "POST",
       headers: {
@@ -80,8 +34,17 @@ Deno.serve(async (req) => {
       body: JSON.stringify({
         source_url: OLIVER_IMAGE_URL,
         script: {
-          type: "audio",
-          audio_url: audioUrl,
+          type: "text",
+          input: reel.script,
+          provider: {
+            type: "elevenlabs",
+            voice_id: OLIVER_VOICE_ID,
+            voice_config: {
+              api_key: ELEVENLABS_API_KEY,
+              stability: 0.5,
+              similarity_boost: 0.75,
+            },
+          },
         },
         config: {
           fluent: true,
