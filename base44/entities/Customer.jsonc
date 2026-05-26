@@ -37,7 +37,6 @@
       "title": "CRM Type",
       "enum": [
         "hubspot",
-        "salesforce",
         "none"
       ],
       "default": "none"
@@ -45,10 +44,6 @@
     "hubspot_contact_id": {
       "type": "string",
       "title": "HubSpot Contact ID"
-    },
-    "salesforce_contact_id": {
-      "type": "string",
-      "title": "Salesforce Contact ID"
     },
     "synced_to_crm": {
       "type": "boolean",
