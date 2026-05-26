@@ -9,7 +9,7 @@ export default function Navbar() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-4 border-b border-white/8" style={{ background: "rgba(10,14,26,0.92)", backdropFilter: "blur(20px)" }}>
       <Link to="/" className="flex items-center gap-2.5">
-        <img src={LOGO} alt="LensFlow" className="h-9 w-auto" />
+        <img src={LOGO} alt="LensFlow" className="h-16 w-auto brightness-0 invert" />
       </Link>
 
       <nav className="hidden md:flex items-center gap-7">
