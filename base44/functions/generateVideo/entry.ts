@@ -1,6 +1,6 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.25';
 
-const OLIVER_IMAGE_URL = "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=512&h=512&fit=crop&crop=face";
+const OLIVER_IMAGE_URL = "https://randomuser.me/api/portraits/men/75.jpg";
 const OLIVER_VOICE_ID = "jRAAK67SEFE9m7ci5DhD";
 
 Deno.serve(async (req) => {
