@@ -1,24 +1,20 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.25';
 
 // Triggered by entity automation when a Reel status becomes "complete".
-// Calls D-ID /talks using ElevenLabs as the voice provider.
-// Stores the D-ID talk ID and sets status → "rendering".
+// Calls D-ID /talks using Microsoft neural TTS.
+// Once you've created Mia & Oliver in D-ID, replace PRESENTER_IMAGE_URL
+// with the image URL from your D-ID agent/presenter.
 
-// Default presenter image — replace with your agent's photo URL if desired
-const PRESENTER_IMAGE_URL = "https://media.base44.com/images/public/6a1440ebe28bb283cc5442e2/146903c3c_hero-luxury-property-twilight.png";
-
-// ElevenLabs voice: Rachel (warm, clear female voice)
-const ELEVENLABS_VOICE_ID = "21m00Tcm4TlvDq8ikWAM";
+// TODO: Replace with your actual presenter image URL once created in D-ID
+const PRESENTER_IMAGE_URL = "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=600&fit=crop&crop=face";
 
 Deno.serve(async (req) => {
   try {
     const base44 = createClientFromRequest(req);
 
     const DID_API_KEY = Deno.env.get("DID_API_KEY");
-    const ELEVENLABS_API_KEY = Deno.env.get("ELEVENLABS_API_KEY");
-
-    if (!DID_API_KEY || !ELEVENLABS_API_KEY) {
-      return Response.json({ error: "Missing DID_API_KEY or ELEVENLABS_API_KEY" }, { status: 500 });
+    if (!DID_API_KEY) {
+      return Response.json({ error: "Missing DID_API_KEY" }, { status: 500 });
     }
 
     const body = await req.json();
@@ -36,7 +32,7 @@ Deno.serve(async (req) => {
       return Response.json({ message: "Reel not in complete status, skipping" });
     }
 
-    // Submit to D-ID with ElevenLabs voice provider
+    // Submit to D-ID using Microsoft neural TTS (no external integrations required)
     const didRes = await fetch("https://api.d-id.com/talks", {
       method: "POST",
       headers: {
@@ -50,12 +46,8 @@ Deno.serve(async (req) => {
           type: "text",
           input: reel.script,
           provider: {
-            type: "elevenlabs",
-            voice_id: ELEVENLABS_VOICE_ID,
-            voice_config: {
-              stability: 0.5,
-              similarity_boost: 0.75,
-            },
+            type: "microsoft",
+            voice_id: "en-AU-NatashaNeural", // Australian female voice — great for real estate
           },
         },
         config: {
