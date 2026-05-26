@@ -206,25 +206,40 @@ export default function Home() {
 
       {/* Pricing teaser */}
       <section className="py-24 px-6 border-t border-white/8">
-        <div className="max-w-2xl mx-auto text-center">
+        <div className="max-w-4xl mx-auto text-center">
           <p className="text-xs font-mono uppercase tracking-widest text-white/30 mb-4">Pricing</p>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">$399 / month.<br /><span className="text-white/50">AI presenters + full automation.</span></h2>
-          <p className="text-white/50 mb-12">7-day free trial · Cancel anytime</p>
-          <div className="max-w-md mx-auto mb-8">
-            <div className="p-8 rounded-2xl border border-[#C99A2E] text-left" style={{ background: "rgba(201,154,46,0.06)" }}>
-              <div className="text-xs font-mono uppercase tracking-widest mb-3" style={{ color: "#C99A2E" }}>Recommended</div>
-              <h3 className="text-2xl font-bold mb-2">Concierge</h3>
-              <p className="text-4xl font-bold mb-3" style={{ color: "#C99A2E" }}>$399<span className="text-sm text-white/40 font-normal"> AUD/mo</span></p>
-              <p className="text-white/60 mb-6">Virtual Twin. Mia + Oliver as your dedicated AI presenters. Full automation, bespoke avatar, total control.</p>
-              <a href="https://www.lensflow.com.au/register">
-                <button className="w-full py-3 rounded-xl text-sm font-semibold transition-all" style={{ background: "#C99A2E", color: "#0a0e1a" }}>
-                  Start Trial
-                </button>
-              </a>
-            </div>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">From $79 / month.<br /><span className="text-white/50">Less than one listing photographer.</span></h2>
+          <p className="text-white/50 mb-12">Four tiers · 7-day free trial on all subscriptions · Cancel anytime</p>
+          <div className="grid md:grid-cols-3 gap-4 mb-8">
+            {[
+              { name: "Starter", price: "$79", desc: "The sole performer. Film yourself, beautifully.", cta: "Start trial", features: [] },
+              { name: "Elite", price: "$199", desc: "Mia + Oliver are your AI presenters. You don't film a thing.", cta: "Start trial", popular: true, features: [] },
+              { name: "Concierge", price: "$399", desc: "Virtual Twin. Total automation. Bespoke avatar. + SaaS Dashboard.", cta: "Begin VIP intake", features: ["Dedicated AI presenters", "Full automation", "SaaS Dashboard", "Reel history & analytics", "Team management"] },
+            ].map((plan) => (
+              <div key={plan.name} className={`p-6 rounded-2xl border text-left transition-all flex flex-col ${plan.popular ? "border-[#C99A2E]" : "border-white/10"}`} style={{ background: plan.popular ? "rgba(201,154,46,0.06)" : "rgba(255,255,255,0.03)" }}>
+                {plan.popular && <div className="text-xs font-mono uppercase tracking-widest mb-3" style={{ color: "#C99A2E" }}>Most Popular</div>}
+                <h3 className="text-xl font-bold mb-1">{plan.name}</h3>
+                <p className="text-3xl font-bold mb-2" style={{ color: "#C99A2E" }}>{plan.price}<span className="text-sm text-white/40 font-normal"> AUD/mo</span></p>
+                <p className="text-sm text-white/50 mb-4">{plan.desc}</p>
+                {plan.features.length > 0 && (
+                  <ul className="text-xs text-white/50 mb-6 space-y-2 flex-1">
+                    {plan.features.map((f) => (
+                      <li key={f} className="flex items-center gap-2">
+                        <span style={{ color: "#C99A2E" }}>✓</span> {f}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                <a href="https://www.lensflow.com.au/register">
+                  <button className={`w-full py-2.5 rounded-xl text-sm font-semibold transition-all ${plan.popular ? "" : "border border-white/15 text-white hover:border-white/30"}`} style={plan.popular ? { background: "#C99A2E", color: "#0a0e1a" } : {}}>
+                    {plan.cta}
+                  </button>
+                </a>
+              </div>
+            ))}
           </div>
           <Link to="/pricing" className="text-sm hover:opacity-70 transition-opacity" style={{ color: "#C99A2E" }}>
-            See full features + comparison
+            See full pricing + feature comparison
           </Link>
         </div>
       </section>
