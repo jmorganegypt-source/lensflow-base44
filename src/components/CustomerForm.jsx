@@ -13,6 +13,7 @@ export default function CustomerForm({ onSuccess }) {
   const [videos, setVideos] = useState([]);
   const [uploading, setUploading] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [crmType, setCrmType] = useState('none');
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -55,6 +56,7 @@ export default function CustomerForm({ onSuccess }) {
         ...formData,
         photos_urls: photos,
         videos_urls: videos,
+        crm_type: crmType,
       });
       onSuccess();
     } catch (error) {
@@ -95,6 +97,19 @@ export default function CustomerForm({ onSuccess }) {
       </div>
 
       <div className="grid md:grid-cols-2 gap-6 mb-6">
+        <div>
+          <label className="block text-sm font-medium text-slate-700 mb-2">CRM Type</label>
+          <select
+            value={crmType}
+            onChange={(e) => setCrmType(e.target.value)}
+            className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none"
+            style={{ borderColor: '#e2e8f0' }}
+          >
+            <option value="none">No CRM (Local Storage Only)</option>
+            <option value="hubspot">HubSpot</option>
+            <option value="salesforce">Salesforce</option>
+          </select>
+        </div>
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-2">Phone</label>
           <input

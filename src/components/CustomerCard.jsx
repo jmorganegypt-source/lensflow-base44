@@ -47,34 +47,39 @@ export default function CustomerCard({ customer, onDelete, onSync, syncing }) {
         </div>
       </div>
 
-      {/* HubSpot Status */}
+      {/* CRM Status */}
       <div className="p-6 border-b border-slate-200 bg-slate-50">
-        <p className="text-xs font-mono uppercase tracking-widest text-slate-400 mb-2">HubSpot</p>
-        <p className="text-sm">
-          {customer.synced_to_hubspot ? (
-            <span style={{ color: '#22c55e' }}>✓ Synced</span>
-          ) : (
-            <span className="text-slate-500">Not synced</span>
+        <p className="text-xs font-mono uppercase tracking-widest text-slate-400 mb-2">CRM</p>
+        <div className="flex items-center justify-between">
+          <p className="text-sm font-medium capitalize">
+            {customer.crm_type === 'none' ? '📦 Local Storage' : customer.crm_type === 'hubspot' ? '🔵 HubSpot' : '☁️ Salesforce'}
+          </p>
+          {customer.crm_type !== 'none' && (
+            <span style={{ color: customer.synced_to_crm ? '#22c55e' : '#ef4444' }} className="text-xs font-medium">
+              {customer.synced_to_crm ? '✓' : '✗'}
+            </span>
           )}
-        </p>
+        </div>
       </div>
 
       {/* Actions */}
       <div className="p-6 flex gap-2">
-        <button
-          onClick={onSync}
-          disabled={syncing}
-          className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2 rounded text-sm font-medium border"
-          style={{
-            borderColor: '#C99A2E',
-            color: '#C99A2E',
-            background: 'transparent',
-            opacity: syncing ? 0.5 : 1,
-          }}
-        >
-          <RotateCw className={`w-4 h-4 ${syncing ? 'animate-spin' : ''}`} />
-          {syncing ? 'Syncing...' : 'Sync HubSpot'}
-        </button>
+        {customer.crm_type !== 'none' && (
+          <button
+            onClick={onSync}
+            disabled={syncing}
+            className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2 rounded text-sm font-medium border"
+            style={{
+              borderColor: '#C99A2E',
+              color: '#C99A2E',
+              background: 'transparent',
+              opacity: syncing ? 0.5 : 1,
+            }}
+          >
+            <RotateCw className={`w-4 h-4 ${syncing ? 'animate-spin' : ''}`} />
+            {syncing ? 'Syncing...' : 'Sync CRM'}
+          </button>
+        )}
         <button
           onClick={onDelete}
           className="px-3 py-2 rounded text-red-600 hover:bg-red-50 transition-colors"

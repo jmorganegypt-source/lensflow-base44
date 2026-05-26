@@ -31,10 +31,10 @@ export default function SalesRepPortal() {
     fetchCustomers();
   };
 
-  const handleSyncToHubSpot = async (customer) => {
+  const handleSyncToCRM = async (customer) => {
     setSyncing(customer.id);
     try {
-      await base44.functions.invoke('syncToHubSpot', { customerId: customer.id });
+      await base44.functions.invoke('syncToCRM', { customerId: customer.id });
       fetchCustomers();
     } catch (error) {
       console.error('Sync failed:', error);
@@ -77,7 +77,7 @@ export default function SalesRepPortal() {
                 key={customer.id}
                 customer={customer}
                 onDelete={() => handleDelete(customer.id)}
-                onSync={() => handleSyncToHubSpot(customer)}
+                onSync={() => handleSyncToCRM(customer)}
                 syncing={syncing === customer.id}
               />
             ))}

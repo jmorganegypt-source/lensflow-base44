@@ -32,13 +32,27 @@
       },
       "title": "Video URLs"
     },
+    "crm_type": {
+      "type": "string",
+      "title": "CRM Type",
+      "enum": [
+        "hubspot",
+        "salesforce",
+        "none"
+      ],
+      "default": "none"
+    },
     "hubspot_contact_id": {
       "type": "string",
       "title": "HubSpot Contact ID"
     },
-    "synced_to_hubspot": {
+    "salesforce_contact_id": {
+      "type": "string",
+      "title": "Salesforce Contact ID"
+    },
+    "synced_to_crm": {
       "type": "boolean",
-      "title": "Synced to HubSpot",
+      "title": "Synced to CRM",
       "default": false
     }
   },
