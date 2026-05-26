@@ -5,8 +5,8 @@ import { createClientFromRequest } from 'npm:@base44/sdk@0.8.25';
 // Once you've created Mia & Oliver in D-ID, replace PRESENTER_IMAGE_URL
 // with the image URL from your D-ID agent/presenter.
 
-// TODO: Replace with your actual presenter image URL once created in D-ID
-const PRESENTER_IMAGE_URL = "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=600&fit=crop&crop=face";
+// Oliver presenter video (ElevenLabs / Veed)
+const PRESENTER_IMAGE_URL = "https://media.base44.com/videos/public/6a1440ebe28bb283cc5442e2/75db00a9e_ElevenLabs_video_veed-fabric_2026-05-17T17_33_17.mp4";
 
 Deno.serve(async (req) => {
   try {
