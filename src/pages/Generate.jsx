@@ -7,6 +7,7 @@ import { base44 } from "@/api/base44Client";
 export default function Generate() {
   const [currentView, setCurrentView] = useState("input");
   const [listingUrl, setListingUrl] = useState("");
+  const [reelId, setReelId] = useState(null);
 
   const handleGenerate = (url) => {
     setListingUrl(url);
@@ -14,7 +15,8 @@ export default function Generate() {
   };
 
   const handleComplete = async (script) => {
-    base44.entities.Reel.create({ listing_url: listingUrl, status: "complete", script: script || "" });
+    const reel = await base44.entities.Reel.create({ listing_url: listingUrl, status: "complete", script: script || "" });
+    setReelId(reel.id);
     setCurrentView("media");
   };
 
@@ -26,7 +28,7 @@ export default function Generate() {
           <ProgressView listingUrl={listingUrl} onComplete={handleComplete} />
         )}
         {currentView === "media" && (
-          <MediaDashboard listingUrl={listingUrl} onReset={() => { setListingUrl(""); setCurrentView("input"); }} />
+          <MediaDashboard listingUrl={listingUrl} reelId={reelId} onReset={() => { setListingUrl(""); setCurrentView("input"); setReelId(null); }} />
         )}
       </div>
     </div>

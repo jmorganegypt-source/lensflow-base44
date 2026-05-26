@@ -1,7 +1,7 @@
-import { Button } from "@/components/ui/button";
-import { Download, Share2, RotateCcw, Play, Instagram, ExternalLink, LayoutDashboard } from "lucide-react";
-import { useState } from "react";
+import { Download, Share2, RotateCcw, Play, Instagram, ExternalLink, LayoutDashboard, Loader2, AlertCircle } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import { base44 } from "@/api/base44Client";
 
 const LOGO = "https://media.base44.com/images/public/6a1440ebe28bb283cc5442e2/da745320e_logo-lensflow-mark.png";
 const THUMB_IMG = "https://media.base44.com/images/public/6a1440ebe28bb283cc5442e2/146903c3c_hero-luxury-property-twilight.png";
@@ -31,9 +31,95 @@ function XIcon({ className }) {
   );
 }
 
-export default function MediaDashboard({ listingUrl, onReset }) {
+export default function MediaDashboard({ listingUrl, reelId, onReset }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [thumbSrc, setThumbSrc] = useState(THUMB_IMG);
+  const [reel, setReel] = useState(null);
+  const [pollStatus, setPollStatus] = useState("rendering"); // "rendering" | "ready" | "failed"
+  const videoRef = useRef(null);
+  const intervalRef = useRef(null);
+
+  useEffect(() => {
+    if (!reelId) return;
+    const poll = async () => {
+      const r = await base44.entities.Reel.get(reelId);
+      setReel(r);
+      if (r.status === "ready") {
+        setPollStatus("ready");
+        clearInterval(intervalRef.current);
+      } else if (r.status === "failed") {
+        setPollStatus("failed");
+        clearInterval(intervalRef.current);
+      }
+    };
+    poll();
+    intervalRef.current = setInterval(poll, 5000);
+    return () => clearInterval(intervalRef.current);
+  }, [reelId]);
+
+  const handleDownload = () => {
+    if (reel?.video_url) {
+      const a = document.createElement("a");
+      a.href = reel.video_url;
+      a.download = "lensflow-reel.mp4";
+      a.click();
+    }
+  };
+
+  const handleCopyLink = () => {
+    if (reel?.video_url) navigator.clipboard.writeText(reel.video_url);
+  };
+
+  // Rendering / failed state
+  if (pollStatus === "rendering") {
+    return (
+      <div className="min-h-screen flex flex-col" style={{ background: "#FAF7F2", color: "#0F1A2E" }}>
+        <header className="flex items-center justify-between px-8 py-4 border-b border-[#0F1A2E]/8 bg-[#FAF7F2]/90 backdrop-blur-sm">
+          <a href="https://www.lensflow.com.au"><img src={LOGO} alt="LensFlow" className="h-9 w-auto" /></a>
+          <button onClick={onReset} className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm text-[#0F1A2E]/50 hover:text-[#0F1A2E] hover:bg-[#0F1A2E]/5 transition-all">
+            <RotateCcw className="w-4 h-4" /> New Reel
+          </button>
+        </header>
+        <div className="flex-1 flex flex-col items-center justify-center gap-6">
+          <div className="w-16 h-16 rounded-2xl border border-[#C99A2E]/30 flex items-center justify-center animate-pulse-glow" style={{ background: "rgba(201,154,46,0.08)" }}>
+            <Loader2 className="w-8 h-8 animate-spin" style={{ color: "#C99A2E" }} />
+          </div>
+          <div className="text-center">
+            <p className="text-xl font-semibold text-[#0F1A2E]">Your reel is rendering…</p>
+            <p className="text-sm text-[#0F1A2E]/40 mt-1">D-ID is generating your AI video. This usually takes 1–3 minutes.</p>
+          </div>
+          <Link to="/dashboard/reels" className="mt-2 inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-[#C99A2E]/40 text-[#C99A2E] text-sm font-medium hover:bg-[#C99A2E]/8 transition-all">
+            <LayoutDashboard className="w-4 h-4" /> Check My Reels
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  if (pollStatus === "failed") {
+    return (
+      <div className="min-h-screen flex flex-col" style={{ background: "#FAF7F2", color: "#0F1A2E" }}>
+        <header className="flex items-center justify-between px-8 py-4 border-b border-[#0F1A2E]/8 bg-[#FAF7F2]/90 backdrop-blur-sm">
+          <a href="https://www.lensflow.com.au"><img src={LOGO} alt="LensFlow" className="h-9 w-auto" /></a>
+          <button onClick={onReset} className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm text-[#0F1A2E]/50 hover:text-[#0F1A2E] hover:bg-[#0F1A2E]/5 transition-all">
+            <RotateCcw className="w-4 h-4" /> Try Again
+          </button>
+        </header>
+        <div className="flex-1 flex flex-col items-center justify-center gap-6">
+          <div className="w-16 h-16 rounded-2xl border border-red-200 flex items-center justify-center" style={{ background: "rgba(239,68,68,0.08)" }}>
+            <AlertCircle className="w-8 h-8 text-red-500" />
+          </div>
+          <div className="text-center">
+            <p className="text-xl font-semibold text-[#0F1A2E]">Rendering failed</p>
+            <p className="text-sm text-[#0F1A2E]/40 mt-1">Something went wrong generating your video. Please try again.</p>
+          </div>
+          <button onClick={onReset} className="mt-2 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#0F1A2E] text-white text-sm font-medium hover:bg-[#1A2944] transition-all">
+            <RotateCcw className="w-4 h-4" /> Start Over
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex flex-col" style={{ background: "#FAF7F2", color: "#0F1A2E" }}>
@@ -55,23 +141,22 @@ export default function MediaDashboard({ listingUrl, onReset }) {
         <div className="animate-scale-in">
           <div className="relative w-[260px] sm:w-[300px] aspect-[9/16] rounded-3xl overflow-hidden shadow-[0_20px_60px_rgba(15,26,46,0.15)] border border-[#0F1A2E]/8">
             <div className="absolute inset-0">
-              <img
-                src={thumbSrc}
-                alt="Video preview"
-                className="w-full h-full object-cover"
-                onError={() => setThumbSrc(THUMB_FALLBACK)}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0F1A2E]/50 via-transparent to-[#0F1A2E]/10" />
+              {reel?.video_url ? (
+                <video ref={videoRef} src={reel.video_url} className="w-full h-full object-cover" playsInline loop />
+              ) : (
+                <img src={thumbSrc} alt="Video preview" className="w-full h-full object-cover" onError={() => setThumbSrc(THUMB_FALLBACK)} />
+              )}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0F1A2E]/50 via-transparent to-[#0F1A2E]/10 pointer-events-none" />
             </div>
             {!isPlaying && (
-              <button onClick={() => setIsPlaying(true)} className="absolute inset-0 flex items-center justify-center group">
+              <button onClick={() => { setIsPlaying(true); if (reel?.video_url) videoRef.current?.play(); }} className="absolute inset-0 flex items-center justify-center group">
                 <div className="w-16 h-16 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-300">
                   <Play className="w-7 h-7 ml-1" fill="#0F1A2E" color="#0F1A2E" />
                 </div>
               </button>
             )}
             {isPlaying && (
-              <button onClick={() => setIsPlaying(false)} className="absolute inset-0 flex items-end justify-center pb-6">
+              <button onClick={() => { setIsPlaying(false); videoRef.current?.pause(); }} className="absolute inset-0 flex items-end justify-center pb-6">
                 <div className="flex items-center gap-1">
                   {[0, 1, 2, 3, 4].map((i) => (
                     <div key={i} className="w-1 bg-white rounded-full animate-pulse" style={{ height: `${16 + i * 4}px`, animationDelay: `${i * 0.1}s` }} />
@@ -102,11 +187,11 @@ export default function MediaDashboard({ listingUrl, onReset }) {
           </div>
 
           <div className="space-y-3">
-            <button className="w-full h-12 rounded-full inline-flex items-center justify-center gap-2 bg-[#0F1A2E] hover:bg-[#1A2944] text-white font-semibold text-base shadow-sm transition-all duration-300">
+            <button onClick={handleDownload} disabled={!reel?.video_url} className="w-full h-12 rounded-full inline-flex items-center justify-center gap-2 bg-[#0F1A2E] hover:bg-[#1A2944] text-white font-semibold text-base shadow-sm transition-all duration-300 disabled:opacity-50">
               <Download className="w-5 h-5" />
               Download Video
             </button>
-            <button className="w-full h-12 rounded-full inline-flex items-center justify-center gap-2 bg-white border border-[#0F1A2E]/15 hover:border-[#0F1A2E]/30 text-[#0F1A2E] font-medium transition-all">
+            <button onClick={handleCopyLink} disabled={!reel?.video_url} className="w-full h-12 rounded-full inline-flex items-center justify-center gap-2 bg-white border border-[#0F1A2E]/15 hover:border-[#0F1A2E]/30 text-[#0F1A2E] font-medium transition-all disabled:opacity-50">
               <Share2 className="w-5 h-5" />
               Copy Share Link
             </button>
