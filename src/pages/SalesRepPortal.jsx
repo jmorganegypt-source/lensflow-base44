@@ -3,6 +3,7 @@ import { base44 } from '@/api/base44Client';
 import { Plus, Download, Trash2, RotateCw } from 'lucide-react';
 import CustomerForm from '../components/CustomerForm';
 import CustomerCard from '../components/CustomerCard';
+import FeatureSuggestionBox from '../components/FeatureSuggestionBox';
 
 export default function SalesRepPortal() {
   const [customers, setCustomers] = useState([]);
@@ -123,14 +124,15 @@ export default function SalesRepPortal() {
           <CustomerForm onSuccess={handleCustomerCreated} />
         </div>
       ) : loading ? (
-          <div className="text-center py-12">
-            <div className="w-8 h-8 border-4 border-slate-200 border-t-slate-800 rounded-full animate-spin mx-auto"></div>
-          </div>
-        ) : customers.length === 0 ? (
-          <div className="text-center py-12 bg-white rounded-lg border border-slate-200">
-            <p className="text-slate-500">No customers yet. Create one to get started.</p>
-          </div>
-        ) : (
+        <div className="text-center py-12">
+          <div className="w-8 h-8 border-4 border-slate-200 border-t-slate-800 rounded-full animate-spin mx-auto"></div>
+        </div>
+      ) : customers.length === 0 ? (
+        <div className="text-center py-12 bg-white rounded-lg border border-slate-200">
+          <p className="text-slate-500">No customers yet. Create one to get started.</p>
+        </div>
+      ) : (
+        <div className="space-y-8">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {customers.map((customer) => (
               <CustomerCard
@@ -142,7 +144,9 @@ export default function SalesRepPortal() {
               />
             ))}
           </div>
-        )}
+          <FeatureSuggestionBox />
+        </div>
+      )}
       </div>
     </div>
   );
