@@ -63,9 +63,9 @@ export default function Home() {
               #1 AI Real Estate Media Platform
             </div>
             <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold leading-[0.92] mb-6">
-              Stop being a<br />
-              videographer.<br />
-              <span style={{ color: "#C99A2E", fontStyle: "italic" }}>Start being an agent.</span>
+              Stop wasting 8 hours<br />
+              on video every week.<br />
+              <span style={{ color: "#C99A2E", fontStyle: "italic" }}>Get them back instantly.</span>
             </h1>
             <p className="text-lg text-white/60 max-w-xl mb-8 leading-relaxed">
               The big apps make you do the work. LensFlow lets Mia do it for you — she writes the script, sets the stage, and reads it on camera. Record on your phone, or skip filming entirely.
