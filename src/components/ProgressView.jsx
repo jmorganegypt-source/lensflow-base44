@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import { Check, Loader2, Globe, FileText, Mic, Film } from "lucide-react";
 
-const LOGO = "https://lensflow.com.au/assets/brand/lensflow-logo.svg";
-const LOGO_FALLBACK = "https://media.base44.com/images/public/6a1440ebe28bb283cc5442e2/bc7de8a58_logo-lensflow-mark.png";
+const LOGO = "https://media.base44.com/images/public/6a1440ebe28bb283cc5442e2/da745320e_logo-lensflow-mark.png";
 
 const PIPELINE_STEPS = [
   { id: "scrape", label: "Scraping property details", description: "Extracting images, descriptions, and listing data", icon: Globe, duration: 3000 },
@@ -14,7 +13,7 @@ const PIPELINE_STEPS = [
 export default function ProgressView({ listingUrl, onComplete }) {
   const [currentStep, setCurrentStep] = useState(0);
   const [stepProgress, setStepProgress] = useState(0);
-  const [logoSrc, setLogoSrc] = useState(LOGO);
+
 
   useEffect(() => {
     if (currentStep >= PIPELINE_STEPS.length) {
@@ -49,8 +48,7 @@ export default function ProgressView({ listingUrl, onComplete }) {
     <div className="min-h-screen flex flex-col" style={{ background: "#FAF7F2", color: "#0F1A2E" }}>
       <header className="flex items-center px-8 py-4 border-b border-[#0F1A2E]/8 bg-[#FAF7F2]/90 backdrop-blur-sm">
         <a href="https://www.lensflow.com.au" className="flex items-center gap-2.5">
-          <img src={logoSrc} alt="LensFlow" className="h-8 w-auto" onError={() => setLogoSrc(LOGO_FALLBACK)} />
-          <span className="text-sm font-semibold tracking-widest text-[#0F1A2E] uppercase">Lens Flow</span>
+          <img src={LOGO} alt="LensFlow" className="h-9 w-auto" />
         </a>
       </header>
 

@@ -3,16 +3,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Trophy, ArrowUpRight, Globe, Zap, Film, Video, Play, Sparkles } from "lucide-react";
 
-const LOGO = "https://lensflow.com.au/assets/brand/lensflow-logo.svg";
-const LOGO_FALLBACK = "https://media.base44.com/images/public/6a1440ebe28bb283cc5442e2/bc7de8a58_logo-lensflow-mark.png";
-const HERO_IMG = "https://lensflow.com.au/assets/property/villa-hero-bg.jpg";
+const LOGO = "https://media.base44.com/images/public/6a1440ebe28bb283cc5442e2/da745320e_logo-lensflow-mark.png";
+const HERO_IMG = "https://media.base44.com/images/public/6a1440ebe28bb283cc5442e2/146903c3c_hero-luxury-property-twilight.png";
 
 const TAGLINE = "Paste any property listing URL. Mia writes the script, voices the narration, and renders a 9:16 reel ready for REA, Instagram and TikTok.";
 
 export default function InputScreen({ onGenerate }) {
   const [url, setUrl] = useState("");
   const [isFocused, setIsFocused] = useState(false);
-  const [logoSrc, setLogoSrc] = useState(LOGO);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,12 +23,10 @@ export default function InputScreen({ onGenerate }) {
       <header className="flex items-center justify-between px-8 py-4 border-b border-[#0F1A2E]/8 bg-[#FAF7F2]/90 backdrop-blur-sm sticky top-0 z-50">
         <a href="https://www.lensflow.com.au" className="flex items-center gap-2.5">
           <img
-            src={logoSrc}
+            src={LOGO}
             alt="LensFlow"
-            className="h-8 w-auto"
-            onError={() => setLogoSrc(LOGO_FALLBACK)}
+            className="h-9 w-auto"
           />
-          <span className="text-sm font-semibold tracking-widest text-[#0F1A2E] uppercase">Lens Flow</span>
         </a>
         <nav className="hidden md:flex items-center gap-7">
           <a href="https://www.lensflow.com.au/presenters" className="text-sm text-[#0F1A2E]/60 hover:text-[#0F1A2E] transition-colors">Presenters</a>

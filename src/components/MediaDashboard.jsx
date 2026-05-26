@@ -2,10 +2,9 @@ import { Button } from "@/components/ui/button";
 import { Download, Share2, RotateCcw, Play, Instagram, ExternalLink } from "lucide-react";
 import { useState } from "react";
 
-const LOGO = "https://lensflow.com.au/assets/brand/lensflow-logo.svg";
-const LOGO_FALLBACK = "https://media.base44.com/images/public/6a1440ebe28bb283cc5442e2/bc7de8a58_logo-lensflow-mark.png";
-const THUMB_IMG = "https://lensflow.com.au/assets/property/mia-listing-card.jpg";
-const THUMB_FALLBACK = "https://media.base44.com/images/public/6a1440ebe28bb283cc5442e2/814f6e346_sample-video-thumbnail-kitchen.png";
+const LOGO = "https://media.base44.com/images/public/6a1440ebe28bb283cc5442e2/da745320e_logo-lensflow-mark.png";
+const THUMB_IMG = "https://media.base44.com/images/public/6a1440ebe28bb283cc5442e2/146903c3c_hero-luxury-property-twilight.png";
+const THUMB_FALLBACK = "https://media.base44.com/images/public/6a1440ebe28bb283cc5442e2/448449b68_sample-video-thumbnail-kitchen.png";
 
 function TikTokIcon({ className }) {
   return (
@@ -33,15 +32,13 @@ function XIcon({ className }) {
 
 export default function MediaDashboard({ listingUrl, onReset }) {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [logoSrc, setLogoSrc] = useState(LOGO);
   const [thumbSrc, setThumbSrc] = useState(THUMB_IMG);
 
   return (
     <div className="min-h-screen flex flex-col" style={{ background: "#FAF7F2", color: "#0F1A2E" }}>
       <header className="flex items-center justify-between px-8 py-4 border-b border-[#0F1A2E]/8 bg-[#FAF7F2]/90 backdrop-blur-sm">
         <a href="https://www.lensflow.com.au" className="flex items-center gap-2.5">
-          <img src={logoSrc} alt="LensFlow" className="h-8 w-auto" onError={() => setLogoSrc(LOGO_FALLBACK)} />
-          <span className="text-sm font-semibold tracking-widest text-[#0F1A2E] uppercase">Lens Flow</span>
+          <img src={LOGO} alt="LensFlow" className="h-9 w-auto" />
         </a>
         <button
           onClick={onReset}
