@@ -6,6 +6,7 @@ import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
 import Home from './pages/Home';
+import HowItWorks from './pages/HowItWorks';
 import Presenters from './pages/Presenters';
 import Pricing from './pages/Pricing';
 import Compare from './pages/Compare';
@@ -42,6 +43,7 @@ const AuthenticatedApp = () => {
       <Route path="/pricing" element={<Pricing />} />
       <Route path="/compare" element={<Compare />} />
       <Route path="/generate" element={<Generate />} />
+      <Route path="/how-it-works" element={<HowItWorks />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
