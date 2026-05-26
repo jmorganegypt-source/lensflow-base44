@@ -47,21 +47,27 @@ Deno.serve(async (req) => {
       return Response.json({ error: "ElevenLabs error: " + err }, { status: 500 });
     }
 
-    // Step 2: Upload audio to Base44 public storage
+    // Step 2: Upload audio to D-ID's /audios endpoint
     const audioBuffer = await elevenRes.arrayBuffer();
     const audioBlob = new Blob([audioBuffer], { type: "audio/mpeg" });
-    const formData = new FormData();
-    formData.append("file", audioBlob, "oliver_audio.mp3");
+    const audioForm = new FormData();
+    audioForm.append("audio", audioBlob, "oliver_audio.mp3");
 
-    const uploadRes = await base44.asServiceRole.integrations.Core.UploadFile({ file: audioBlob });
-    const audioUrl = uploadRes?.file_url;
+    const audioUploadRes = await fetch("https://api.d-id.com/audios", {
+      method: "POST",
+      headers: { "Authorization": `Basic ${DID_API_KEY}` },
+      body: audioForm,
+    });
 
-    if (!audioUrl) {
+    const audioUploadData = await audioUploadRes.json();
+    if (!audioUploadRes.ok) {
+      console.error("D-ID audio upload error:", JSON.stringify(audioUploadData));
       await base44.asServiceRole.entities.Reel.update(reelId, { status: "failed" });
-      return Response.json({ error: "Failed to upload audio" }, { status: 500 });
+      return Response.json({ error: "D-ID audio upload error: " + JSON.stringify(audioUploadData) }, { status: 500 });
     }
 
-    console.log("Audio uploaded:", audioUrl);
+    const audioUrl = audioUploadData?.url;
+    console.log("Audio uploaded to D-ID:", audioUrl);
 
     // Step 3: Submit to D-ID with audio URL
     const didRes = await fetch("https://api.d-id.com/talks", {
