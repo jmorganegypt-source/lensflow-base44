@@ -198,6 +198,7 @@ export default function Home() {
               { img: OLIVER, name: "Oliver", accent: "British RP", spec: "Commercial + Investor" },
               { img: ARIA, name: "Aria", accent: "American", spec: "New Developments" },
               { img: MARCUS, name: "Marcus", accent: "Continental", spec: "International Luxury" },
+              { img: "https://luxury-video-studio-1.emergent.host/assets/property/emma-portrait.jpg", name: "Emma", accent: "American", spec: "Coastal Editorial" },
             ].map((p) => (
               <div key={p.name} className="group text-center">
                 <div className="w-28 h-36 md:w-36 md:h-48 rounded-2xl overflow-hidden border border-white/10 mb-3 mx-auto group-hover:border-white/30 transition-all">
