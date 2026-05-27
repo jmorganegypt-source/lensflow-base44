@@ -4,7 +4,7 @@ const VOICE_IDS = {
   Oliver: "jRAAK67SEFE9m7ci5DhD",
   Mia: "69h9o7wh5u0isWHzdogD",
   Aria: "69h9o7wh5u0isWHzdogD",
-  Marcus: null,
+  Marcus: "yXFr3XVHzrViCIHi1yoc",
   Emma: "69h9o7wh5u0isWHzdogD",
 };
 
