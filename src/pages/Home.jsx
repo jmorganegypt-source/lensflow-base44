@@ -28,6 +28,7 @@ const FEATURES = [
     title: "Listing videos — without filming yourself.",
     body: "Mia or Oliver narrates your listing over a Ken-Burns slideshow of your photos. Get a downloadable MP4 in under a minute. Perfect for camera-shy agents.",
     img: MIA,
+    video: "https://drive.google.com/file/d/1uRfjDgzVXunEf0mPwWedL3CtZNXVneld/preview",
   },
   {
     num: "03",
@@ -165,7 +166,17 @@ export default function Home() {
                   </a>
                 </div>
                 <div className="flex-1 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-                  <img src={f.img} alt={f.label} className="w-full h-64 md:h-80 object-cover" />
+                  {f.video ? (
+                    <iframe
+                      src={f.video}
+                      className="w-full h-64 md:h-80"
+                      allow="autoplay"
+                      allowFullScreen
+                      style={{ border: "none" }}
+                    />
+                  ) : (
+                    <img src={f.img} alt={f.label} className="w-full h-64 md:h-80 object-cover" />
+                  )}
                 </div>
               </div>
             ))}
