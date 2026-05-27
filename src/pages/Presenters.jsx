@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -59,6 +59,11 @@ export default function Presenters() {
   const [playingName, setPlayingName] = useState(null);
   const [loadingName, setLoadingName] = useState(null);
   const [audioRef, setAudioRef] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    base44.auth.isAuthenticated().then(setIsAuthenticated);
+  }, []);
 
   const handleHearVoice = async (presenterName) => {
     if (audioRef) {
@@ -70,6 +75,10 @@ export default function Presenters() {
       return;
     }
 
+    if (!isAuthenticated) {
+      base44.auth.redirectToLogin(window.location.pathname);
+      return;
+    }
     setLoadingName(presenterName);
     const response = await base44.functions.invoke('previewVoice', { presenter_name: presenterName });
     const { audio_base64 } = response.data;
@@ -133,7 +142,7 @@ export default function Presenters() {
                     ) : (
                       <Play className="w-3.5 h-3.5" />
                     )}
-                    {loadingName === p.name ? "Generating..." : playingName === p.name ? "Stop" : "Hear voice"}
+                    {loadingName === p.name ? "Generating..." : playingName === p.name ? "Stop" : isAuthenticated ? "Hear voice" : "Log in to hear voice"}
                   </button>
                   <Link to="/generate">
                     <button className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium transition-all hover:opacity-90" style={{ background: "#C99A2E", color: "#0a0e1a" }}>
