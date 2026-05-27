@@ -24,6 +24,7 @@ export default function PropertyEngagementSummary() {
         setProperties(merged.sort((a, b) => (b.average_dom || 0) - (a.average_dom || 0)));
       } catch (err) {
         console.error('Error fetching engagement data:', err);
+        setProperties([]);
       } finally {
         setLoading(false);
       }
