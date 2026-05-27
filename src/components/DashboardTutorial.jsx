@@ -8,6 +8,7 @@ const STEPS = [
     icon: Lock,
     color: "#C99A2E",
     visual: "👤",
+    image: "https://media.base44.com/images/public/6a1440ebe28bb283cc5442e2/e7dd7faf3_generated_image.png",
   },
   {
     title: "Paste Your Listing URL",
@@ -15,6 +16,7 @@ const STEPS = [
     icon: LinkIcon,
     color: "#C99A2E",
     visual: "🔗",
+    image: "https://media.base44.com/images/public/6a1440ebe28bb283cc5442e2/7a65b6aeb_generated_image.png",
   },
   {
     title: "Generate Your Reel",
@@ -22,6 +24,7 @@ const STEPS = [
     icon: Sparkles,
     color: "#C99A2E",
     visual: "✨",
+    image: "https://media.base44.com/images/public/6a1440ebe28bb283cc5442e2/5147b4872_generated_image.png",
   },
   {
     title: "Watch in My Reels",
@@ -29,6 +32,7 @@ const STEPS = [
     icon: BarChart3,
     color: "#C99A2E",
     visual: "📹",
+    image: "https://media.base44.com/images/public/6a1440ebe28bb283cc5442e2/cc3580a12_generated_image.png",
   },
 ];
 
@@ -69,10 +73,9 @@ export default function DashboardTutorial() {
             <div className="flex-1 space-y-6 text-center md:text-left mb-8 md:mb-0 z-10">
               <div className="inline-flex items-center justify-center md:justify-start">
                 <div
-                  className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl shadow-lg"
-                  style={{ background: "rgba(201,154,46,0.1)" }}
-                >
-                  {step.visual}
+                  className="w-16 h-16 rounded-2xl overflow-hidden shadow-lg"
+                  >
+                  <img src={step.image} alt={step.title} className="w-full h-full object-cover" />
                 </div>
               </div>
               <div>
@@ -103,14 +106,8 @@ export default function DashboardTutorial() {
 
             {/* Right: Animated Illustration */}
             <div className="flex-1 relative h-64 md:h-full flex items-center justify-center">
-              <div
-                className="w-48 h-48 rounded-3xl flex items-center justify-center text-6xl shadow-2xl animate-scale-in"
-                style={{
-                  background: `linear-gradient(135deg, rgba(201,154,46,0.15), rgba(201,154,46,0.05))`,
-                  border: "2px solid rgba(201,154,46,0.2)",
-                }}
-              >
-                {step.visual}
+              <div className="w-48 h-48 rounded-3xl overflow-hidden shadow-2xl animate-scale-in border border-white/10">
+                <img src={step.image} alt={step.title} className="w-full h-full object-cover" />
               </div>
             </div>
           </div>
