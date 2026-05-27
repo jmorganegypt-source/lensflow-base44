@@ -33,6 +33,10 @@
     "did_video_id": {
       "type": "string",
       "title": "D-ID Talk ID"
+    },
+    "background_url": {
+      "type": "string",
+      "title": "Background URL"
     }
   },
   "required": [
