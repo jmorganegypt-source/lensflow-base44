@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 
-const LOGO = "https://media.base44.com/images/public/6a1440ebe28bb283cc5442e2/7ca147aa6_generated_image.png";
+const LOGO = "https://media.base44.com/images/public/6a1440ebe28bb283cc5442e2/0f329563c_generated_image.png";
 
 export default function Navbar() {
   const location = useLocation();
