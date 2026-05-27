@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { base44 } from "@/api/base44Client";
-import { Film, Zap, TrendingUp, Clock, ArrowRight } from "lucide-react";
+import { Film, Zap, TrendingUp, Clock, ArrowRight, Search } from "lucide-react";
 import PropertyEngagementSummary from "../components/PropertyEngagementSummary";
 
 export default function DashboardHome() {
   const [user, setUser] = useState(null);
   const [reels, setReels] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [addressSearch, setAddressSearch] = useState("");
 
   useEffect(() => {
     Promise.all([
@@ -22,6 +23,9 @@ export default function DashboardHome() {
 
   const totalReels = reels.length;
   const completedReels = reels.filter((r) => r.status === "complete").length;
+  const filteredReels = addressSearch
+    ? reels.filter((r) => r.property_address?.toLowerCase().includes(addressSearch.toLowerCase()))
+    : reels;
 
   if (loading) {
     return (
@@ -64,23 +68,35 @@ export default function DashboardHome() {
         ))}
       </div>
 
-      {/* Quick action */}
-      <Link to="/generate">
-        <div className="rounded-2xl p-6 border border-[#C99A2E]/30 cursor-pointer hover:border-[#C99A2E]/60 transition-all group" style={{ background: "rgba(201,154,46,0.06)" }}>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ background: "#C99A2E18" }}>
-                <Zap className="w-6 h-6 text-[#C99A2E]" />
-              </div>
-              <div>
-                <p className="text-white font-semibold">Generate a New Reel</p>
-                <p className="text-white/40 text-sm mt-0.5">Paste a listing URL and Mia does the rest</p>
-              </div>
-            </div>
-            <ArrowRight className="w-5 h-5 text-white/30 group-hover:text-[#C99A2E] transition-colors" />
-          </div>
+      {/* Search & Quick action */}
+      <div className="space-y-4">
+        <div className="relative">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
+          <input
+            type="text"
+            placeholder="Search by property address..."
+            value={addressSearch}
+            onChange={(e) => setAddressSearch(e.target.value)}
+            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-white/10 bg-white/5 text-white placeholder-white/40 focus:border-[#C99A2E]/50 focus:bg-white/8 transition-all outline-none"
+          />
         </div>
-      </Link>
+        <Link to="/generate">
+          <div className="rounded-2xl p-6 border border-[#C99A2E]/30 cursor-pointer hover:border-[#C99A2E]/60 transition-all group" style={{ background: "rgba(201,154,46,0.06)" }}>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ background: "#C99A2E18" }}>
+                  <Zap className="w-6 h-6 text-[#C99A2E]" />
+                </div>
+                <div>
+                  <p className="text-white font-semibold">Generate a New Reel</p>
+                  <p className="text-white/40 text-sm mt-0.5">Paste a listing URL and Mia does the rest</p>
+                </div>
+              </div>
+              <ArrowRight className="w-5 h-5 text-white/30 group-hover:text-[#C99A2E] transition-colors" />
+            </div>
+          </div>
+        </Link>
+      </div>
 
       {/* Property Engagement Summary */}
       <div>
@@ -94,14 +110,14 @@ export default function DashboardHome() {
           <h2 className="text-white font-semibold">Recent Reels</h2>
           <Link to="/dashboard/reels" className="text-sm text-[#C99A2E] hover:underline">View all →</Link>
         </div>
-        {reels.length === 0 ? (
+        {filteredReels.length === 0 ? (
           <div className="rounded-2xl border border-white/8 p-10 text-center" style={{ background: "rgba(255,255,255,0.02)" }}>
             <Film className="w-8 h-8 text-white/20 mx-auto mb-3" />
-            <p className="text-white/40 text-sm">No reels yet — generate your first one!</p>
+            <p className="text-white/40 text-sm">{addressSearch ? "No reels match that address" : "No reels yet — generate your first one!"}</p>
           </div>
         ) : (
           <div className="space-y-2">
-            {reels.map((reel) => (
+            {filteredReels.map((reel) => (
               <div key={reel.id} className="flex items-center justify-between rounded-xl px-4 py-3 border border-white/6" style={{ background: "rgba(255,255,255,0.03)" }}>
                 <div className="flex items-center gap-3 min-w-0">
                   <Film className="w-4 h-4 text-white/30 flex-shrink-0" />
