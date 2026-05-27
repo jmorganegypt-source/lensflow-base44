@@ -5,10 +5,10 @@ import DemoClipsSection from "../components/DemoClipsSection";
 import DashboardTutorial from "../components/DashboardTutorial";
 import { ArrowRight, Check, Star, Zap, Film, Camera, Sparkles } from "lucide-react";
 
-const MIA = "https://lensflow.com.au/assets/property/mia-headshot.jpg";
-const OLIVER = "https://lensflow.com.au/assets/property/oliver-portrait.jpg";
-const ARIA = "https://lensflow.com.au/assets/property/aria-portrait.jpg";
-const MARCUS = "https://lensflow.com.au/assets/property/marcus-portrait.jpg";
+const MIA = "/assets/property/mia-headshot.jpg";
+const OLIVER = "/assets/property/oliver-portrait.jpg";
+const ARIA = "/assets/property/aria-portrait.jpg";
+const MARCUS = "/assets/property/marcus-portrait.jpg";
 const HERO_BG = "https://media.base44.com/images/public/6a1440ebe28bb283cc5442e2/146903c3c_hero-luxury-property-twilight.png";
 const KITCHEN = "https://media.base44.com/images/public/6a1440ebe28bb283cc5442e2/448449b68_sample-video-thumbnail-kitchen.png";
 

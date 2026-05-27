@@ -11,7 +11,7 @@ const PRESENTERS = [
     title: "Luxury Residential · Warm & Elegant",
     bio: "Australian-British inflection. Best for prestige residential, beachfront and heritage estates.",
     tags: ["Residential", "Beachfront", "Heritage"],
-    img: "https://lensflow.com.au/assets/property/mia-headshot.jpg",
+    img: "/assets/property/mia-headshot.jpg",
   },
   {
     name: "Oliver",
@@ -20,7 +20,7 @@ const PRESENTERS = [
     title: "Distinguished Authority · Trusted Closer",
     bio: "Refined British baritone with quiet authority. Built for commercial, off-the-plan and investor-grade properties.",
     tags: ["Commercial", "Off-the-plan", "Investor"],
-    img: "https://lensflow.com.au/assets/property/oliver-portrait.jpg",
+    img: "/assets/property/oliver-portrait.jpg",
   },
   {
     name: "Aria",
@@ -29,7 +29,7 @@ const PRESENTERS = [
     title: "Modern Lifestyle · Fresh & Confident",
     bio: "Vibrant American voice for new developments, lifestyle marketing and Instagram-first reels.",
     tags: ["New Developments", "Lifestyle", "Social Media"],
-    img: "https://lensflow.com.au/assets/property/aria-portrait.jpg",
+    img: "/assets/property/aria-portrait.jpg",
   },
   {
     name: "Marcus",
@@ -38,7 +38,7 @@ const PRESENTERS = [
     title: "International Luxe · Sophisticated",
     bio: "Continental polish for international buyers. Translates the language of wealth.",
     tags: ["International", "Penthouse", "Estate"],
-    img: "https://lensflow.com.au/assets/property/marcus-portrait.jpg",
+    img: "/assets/property/marcus-portrait.jpg",
   },
   {
     name: "Emma",
@@ -47,7 +47,7 @@ const PRESENTERS = [
     title: "Coastal Editorial · Bright & Persuasive",
     bio: "Editorial brightness with a confident close. Built for waterfront, lifestyle and Instagram-first storytelling.",
     tags: ["Waterfront", "Lifestyle", "Social Media"],
-    img: "https://lensflow.com.au/assets/property/emma-portrait.jpg",
+    img: "/assets/property/emma-portrait.jpg",
   },
 ];
 
