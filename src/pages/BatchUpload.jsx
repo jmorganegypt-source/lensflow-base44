@@ -92,7 +92,7 @@ export default function BatchUpload() {
               <Upload className="w-12 h-12 mx-auto mb-4" style={{ color: '#C99A2E' }} />
               <p style={{ color: 'white', fontWeight: 'bold', marginBottom: '6px' }}>Upload CSV or Excel file</p>
               <p style={{ color: '#aaa', fontSize: '14px' }}>Column 1: Listing URL or Domain listing link</p>
-              <input type="file" id="fileInput" accept=".csv,.xlsx,.xls" onChange={handleFileUpload} className="hidden" />
+              <input type="file" id="fileInput" accept=".csv,.xlsx,.xls" onChange={handleFileUpload} className="hidden" aria-label="Upload CSV or Excel file" />
             </div>
 
             {error && (
@@ -109,7 +109,7 @@ export default function BatchUpload() {
                 </p>
                 <div style={{ maxHeight: '200px', overflowY: 'auto' }}>
                   {urls.map((url, i) => (
-                    <div key={i} className="text-sm text-white/60 py-1 border-b border-white/5">
+                    <div key={`${url}-${i}`} className="text-sm text-white/60 py-1 border-b border-white/5">
                       {i + 1}. {url}
                     </div>
                   ))}
@@ -142,7 +142,7 @@ export default function BatchUpload() {
               <h3 style={{ color: 'white', fontWeight: 'bold', marginBottom: '16px' }}>Generation Results</h3>
               <div className="space-y-2">
                 {results.map((r, i) => (
-                  <div key={i} className="flex items-center gap-3 p-3 rounded-lg border border-white/5">
+                  <div key={`${r.url}-${i}`} className="flex items-center gap-3 p-3 rounded-lg border border-white/5">
                     {r.status === 'queued' ? (
                       <CheckCircle2 className="w-5 h-5 text-green-400 flex-shrink-0" />
                     ) : (

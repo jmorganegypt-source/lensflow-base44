@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef } from 'react';
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Upload, Play, Square } from "lucide-react";
@@ -20,21 +20,32 @@ export default function NewStudio() {
   };
 
   const startRecording = async () => {
-    const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-    videoRef.current.srcObject = stream;
-    const recorder = new MediaRecorder(stream);
-    mediaRecorderRef.current = recorder;
-    recorder.start();
-    setRecording(true);
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;
+      }
+      const recorder = new MediaRecorder(stream);
+      mediaRecorderRef.current = recorder;
+      recorder.start();
+      setRecording(true);
+    } catch (err) {
+      console.error('Failed to start recording:', err);
+      alert('Camera access denied. Please allow camera permissions.');
+    }
   };
 
   const stopRecording = () => {
-    mediaRecorderRef.current.stop();
-    setRecording(false);
-    mediaRecorderRef.current.onstop = () => {
-      const stream = videoRef.current.srcObject;
-      stream.getTracks().forEach((track) => track.stop());
-    };
+    if (mediaRecorderRef.current) {
+      mediaRecorderRef.current.stop();
+      setRecording(false);
+      mediaRecorderRef.current.onstop = () => {
+        if (videoRef.current && videoRef.current.srcObject) {
+          const stream = videoRef.current.srcObject;
+          stream.getTracks().forEach((track) => track.stop());
+        }
+      };
+    }
   };
 
   return (

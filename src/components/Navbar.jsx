@@ -18,10 +18,9 @@ export default function Navbar() {
         <Link to="/compare" className="text-sm text-white/60 hover:text-white transition-colors">Compare</Link>
         <Link to="/how-it-works" className="text-sm text-white/60 hover:text-white transition-colors">How It Works</Link>
         <Link to="/studio" className="text-sm text-white/60 hover:text-white transition-colors">Studio</Link>
-        <Link to="/enhance" className="text-sm text-white/60 hover:text-white transition-colors">Enhance Photos</Link>
-        <Link to="/generate" className="text-sm text-white/60 hover:text-white transition-colors">Done-for-You</Link>
+        <Link to="/enhance" className="text-sm text-white/60 hover:text-white transition-colors">Enhance</Link>
+        <Link to="/concierge" className="text-sm text-white/60 hover:text-white transition-colors">Concierge</Link>
         <Link to="/dashboard" className="text-sm text-white/60 hover:text-white transition-colors">Dashboard</Link>
-        <Link to="/dashboard" className="text-sm text-white/60 hover:text-white transition-colors">Sign In</Link>
         <Link to="/generate">
           <button className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all" style={{ background: "#C99A2E", color: "#0a0e1a" }}>
             Generate Your Reel Free

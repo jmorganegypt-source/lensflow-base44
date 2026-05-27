@@ -41,12 +41,12 @@ export default function Concierge() {
 
       <section style={{ paddingTop: "100px", paddingBottom: "100px", paddingLeft: "24px", paddingRight: "24px" }}>
         <div className="max-w-2xl mx-auto">
-          <h1 style={{ textAlign: "center", color: "#C99A2E", fontSize: "42px", marginBottom: "12px" }}>LENSFLOW Concierge</h1>
+          <h1 className="text-white" style={{ textAlign: "center", color: "#C99A2E", fontSize: "42px", marginBottom: "12px", fontWeight: "bold" }}>LENSFLOW Concierge</h1>
           <p style={{ textAlign: "center", color: "#aaa", marginBottom: "60px" }}>White-Glove AI Video Production for Elite Agents</p>
 
           {PACKAGES.map((pkg) => (
             <div key={pkg.name} className="rounded-2xl p-8 border border-white/10 mb-8" style={{ background: "rgba(255,255,255,0.02)" }}>
-              <h2 style={{ fontSize: "24px", fontWeight: "bold", marginBottom: "12px" }}>
+              <h2 className="text-white" style={{ fontSize: "24px", fontWeight: "bold", marginBottom: "12px" }}>
                 {pkg.name} — <span style={{ color: "#C99A2E" }}>{pkg.price} / month</span>
               </h2>
               <p style={{ color: "#aaa", marginBottom: "24px" }}>{pkg.description}</p>

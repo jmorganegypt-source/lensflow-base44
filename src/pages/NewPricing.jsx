@@ -34,7 +34,7 @@ export default function NewPricing() {
 
       <section style={{ paddingTop: "100px", paddingBottom: "100px", paddingLeft: "24px", paddingRight: "24px" }}>
         <div className="max-w-5xl mx-auto">
-          <h1 style={{ textAlign: "center", fontSize: "42px", marginBottom: "20px" }}>Simple, Powerful Pricing</h1>
+          <h1 className="text-white" style={{ textAlign: "center", fontSize: "42px", marginBottom: "20px", fontWeight: "bold" }}>Simple, Powerful Pricing</h1>
           <p style={{ textAlign: "center", color: "#aaa", maxWidth: "600px", margin: "0 auto 60px" }}>
             Choose the plan that fits your business. All plans include unlimited AI script generation.
           </p>
@@ -50,7 +50,7 @@ export default function NewPricing() {
                   textAlign: "center",
                 }}
               >
-                <h3 style={{ fontSize: "24px", fontWeight: "bold", marginBottom: "12px" }}>
+                <h3 className="text-white" style={{ fontSize: "24px", fontWeight: "bold", marginBottom: "12px" }}>
                   {plan.name}
                   {plan.popular && (
                     <span style={{ fontSize: "14px", background: "#C99A2E", color: "#0a0a0a", padding: "2px 10px", borderRadius: "999px", marginLeft: "12px" }}>
@@ -63,8 +63,8 @@ export default function NewPricing() {
                   <span style={{ fontSize: "18px", color: "#aaa" }}>/mo</span>
                 </p>
                 <ul style={{ textAlign: "left", lineHeight: "2.2", margin: "30px 0", color: "#aaa" }}>
-                  {plan.features.map((f) => (
-                    <li key={f}>✓ {f}</li>
+                  {plan.features.map((f, idx) => (
+                   <li key={`${plan.name}-${idx}`}>✓ {f}</li>
                   ))}
                 </ul>
                 <a href={plan.href} target="_blank" rel="noopener noreferrer" className="block">
