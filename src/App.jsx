@@ -18,6 +18,8 @@ import Billing from './pages/Billing';
 import DashboardSettings from './pages/DashboardSettings';
 import SalesRepPortal from './pages/SalesRepPortal';
 import BrandVoiceAdvisor from './pages/BrandVoiceAdvisor';
+import HookGenerator from './pages/HookGenerator';
+import LensFlowAssistant from './pages/LensFlowAssistant';
 import VideoHookAdvisor from './pages/VideoHookAdvisor';
 
 const AuthenticatedApp = () => {
@@ -60,6 +62,8 @@ const AuthenticatedApp = () => {
       </Route>
       <Route path="/sales-rep-portal" element={<SalesRepPortal />} />
       <Route path="/brand-voice" element={<BrandVoiceAdvisor />} />
+      <Route path="/hook-generator" element={<HookGenerator />} />
+      <Route path="/assistant" element={<LensFlowAssistant />} />
       <Route path="/video-hooks" element={<VideoHookAdvisor />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
