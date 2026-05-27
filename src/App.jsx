@@ -17,6 +17,7 @@ import MyReels from './pages/MyReels';
 import Billing from './pages/Billing';
 import DashboardSettings from './pages/DashboardSettings';
 import SalesRepPortal from './pages/SalesRepPortal';
+import BrandVoiceAdvisor from './pages/BrandVoiceAdvisor';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -57,6 +58,7 @@ const AuthenticatedApp = () => {
         <Route path="/dashboard/settings" element={<DashboardSettings />} />
       </Route>
       <Route path="/sales-rep-portal" element={<SalesRepPortal />} />
+      <Route path="/brand-voice" element={<BrandVoiceAdvisor />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
