@@ -53,15 +53,7 @@ const PRESENTERS = [
   },
 ];
 
-const VOICE_SAMPLES = {
-  Mia: { voice: "honey", language_code: "en-AU" },
-  Oliver: { voice: "storm", language_code: "en-GB" },
-  Aria: { voice: "sunny", language_code: "en-US" },
-  Marcus: { voice: "river", language_code: "en" },
-  Emma: { voice: "spark", language_code: "en-US" },
-};
 
-const SAMPLE_SCRIPT = "Welcome to this stunning prestige property. Exceptional craftsmanship, breathtaking views, and a lifestyle that truly sets the standard.";
 
 export default function Presenters() {
   const [playingName, setPlayingName] = useState(null);
@@ -69,7 +61,6 @@ export default function Presenters() {
   const [audioRef, setAudioRef] = useState(null);
 
   const handleHearVoice = async (presenterName) => {
-    // Stop any currently playing audio
     if (audioRef) {
       audioRef.pause();
       audioRef.src = "";
@@ -80,13 +71,9 @@ export default function Presenters() {
     }
 
     setLoadingName(presenterName);
-    const config = VOICE_SAMPLES[presenterName];
-    const result = await base44.integrations.Core.GenerateSpeech({
-      text: SAMPLE_SCRIPT,
-      voice: config.voice,
-      language_code: config.language_code,
-    });
-    const audio = new Audio(result.url);
+    const response = await base44.functions.invoke('previewVoice', { presenter_name: presenterName });
+    const url = URL.createObjectURL(new Blob([response.data], { type: 'audio/mpeg' }));
+    const audio = new Audio(url);
     setAudioRef(audio);
     setLoadingName(null);
     setPlayingName(presenterName);
