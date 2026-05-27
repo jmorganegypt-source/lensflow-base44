@@ -67,9 +67,9 @@ export default function InputScreen({ onGenerate }) {
           {/* Input form */}
           <form onSubmit={handleSubmit} className="max-w-2xl mx-auto w-full pt-2">
             <div className={`relative rounded-2xl transition-all duration-300 ${isFocused ? "shadow-[0_0_40px_rgba(201,154,46,0.15)]" : "shadow-[0_4px_24px_rgba(15,26,46,0.08)]"}`}>
-              <div className="gradient-border rounded-2xl">
-                <div className="flex items-center gap-3 p-2 rounded-2xl bg-white">
-                  <div className="pl-4">
+              <div className="gradient-border rounded-2xl pointer-events-auto">
+                <div className="flex items-center gap-3 p-2 rounded-2xl bg-white pointer-events-auto">
+                  <div className="pl-4 pointer-events-none">
                     <Globe className="w-5 h-5 text-[#0F1A2E]/30" />
                   </div>
                   <Input
@@ -79,13 +79,11 @@ export default function InputScreen({ onGenerate }) {
                     onFocus={() => setIsFocused(true)}
                     onBlur={() => setIsFocused(false)}
                     placeholder="Paste your property listing URL here"
-                    className="flex-1 border-0 bg-transparent text-[#0F1A2E] placeholder:text-[#0F1A2E]/30 text-base focus-visible:ring-0 focus-visible:ring-offset-0 h-12" />
-                  
+                    className="flex-1 border-0 bg-transparent text-[#0F1A2E] placeholder:text-[#0F1A2E]/30 text-base focus-visible:ring-0 focus-visible:ring-offset-0 h-12 cursor-text" />
                   <button
                     type="submit"
                     disabled={!url.trim()}
-                    className="h-12 px-6 rounded-xl bg-[#0F1A2E] hover:bg-[#1A2944] text-white text-sm font-semibold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center gap-2">
-                    
+                    className="h-12 px-6 rounded-xl bg-[#0F1A2E] hover:bg-[#1A2944] disabled:bg-[#0F1A2E]/50 text-white text-sm font-semibold transition-all duration-300 disabled:cursor-not-allowed inline-flex items-center gap-2 flex-shrink-0">
                     <Sparkles className="w-4 h-4 text-[#C99A2E]" />
                     <span className="hidden sm:inline">Generate Reel</span>
                     <span className="sm:hidden">Generate</span>
