@@ -87,19 +87,19 @@ export default function Home() {
               ))}
             </ul>
             <div className="flex flex-wrap gap-3">
-              <a href="/dashboard">
+              <Link to="/dashboard">
                 <button className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-semibold text-sm transition-all hover:opacity-90" style={{ background: "#C99A2E", color: "#0a0e1a" }}>
                   <Sparkles className="w-4 h-4" />
                   Start your trial
                   <ArrowRight className="w-4 h-4" />
                 </button>
-              </a>
-              <a href="/generate">
+              </Link>
+              <Link to="/generate">
                 <button className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-semibold text-sm border border-white/20 text-white hover:border-white/40 transition-all">
                   <Film className="w-4 h-4" />
                   Book a live demo
                 </button>
-              </a>
+              </Link>
             </div>
             <p className="mt-4 text-xs text-white/30">Trusted by elite agents — Sydney · London · Dubai</p>
           </div>
@@ -163,11 +163,11 @@ export default function Home() {
                   </div>
                   <h3 className="text-2xl md:text-3xl font-bold leading-tight">{f.title}</h3>
                   <p className="text-white/60 leading-relaxed">{f.body}</p>
-                  <a href="https://www.lensflow.com.au/pricing">
+                  <Link to="/pricing">
                     <button className="inline-flex items-center gap-2 text-sm font-medium hover:opacity-70 transition-opacity mt-2" style={{ color: "#C99A2E" }}>
                       See plans + pricing <ArrowRight className="w-4 h-4" />
                     </button>
-                  </a>
+                  </Link>
                 </div>
                 <div className="flex-1 flex flex-col gap-4">
                   {f.videos ? (
@@ -198,7 +198,6 @@ export default function Home() {
               { img: OLIVER, name: "Oliver", accent: "British RP", spec: "Commercial + Investor" },
               { img: ARIA, name: "Aria", accent: "American", spec: "New Developments" },
               { img: MARCUS, name: "Marcus", accent: "Continental", spec: "International Luxury" },
-
             ].map((p) => (
               <div key={p.name} className="group text-center">
                 <div className="w-28 h-36 md:w-36 md:h-48 rounded-2xl overflow-hidden border border-white/10 mb-3 mx-auto group-hover:border-white/30 transition-all">
@@ -244,17 +243,17 @@ export default function Home() {
                     ))}
                   </ul>
                 )}
-                <a href="/dashboard">
+                <Link to="/dashboard">
                   <button className={`w-full py-2.5 rounded-xl text-sm font-semibold transition-all ${plan.popular ? "" : "border border-white/15 text-white hover:border-white/30"}`} style={plan.popular ? { background: "#C99A2E", color: "#0a0e1a" } : {}}>
                     {plan.cta}
                   </button>
-                </a>
+                </Link>
               </div>
             ))}
           </div>
-          <a href="/pricing" className="text-sm hover:opacity-70 transition-opacity" style={{ color: "#C99A2E" }}>
+          <Link to="/pricing" className="text-sm hover:opacity-70 transition-opacity" style={{ color: "#C99A2E" }}>
             See full pricing + feature comparison
-          </a>
+          </Link>
         </div>
       </section>
 
@@ -264,11 +263,11 @@ export default function Home() {
           <h2 className="text-4xl md:text-5xl font-bold mb-4">Your listings.<br /><span style={{ color: "#C99A2E", fontStyle: "italic" }}>Reimagined.</span></h2>
           <p className="text-white/50 mb-8">Join the agents already replacing $14K agency invoices with one platform.</p>
           <div className="flex flex-wrap justify-center gap-3">
-            <a href="https://www.lensflow.com.au/register">
+            <Link to="/dashboard">
               <button className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-base transition-all hover:opacity-90" style={{ background: "#C99A2E", color: "#0a0e1a" }}>
                 Start recording today <ArrowRight className="w-5 h-5" />
               </button>
-            </a>
+            </Link>
             <Link to="/generate">
               <button className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-base border border-white/20 text-white hover:border-white/40 transition-all">
                 <Camera className="w-5 h-5" />
