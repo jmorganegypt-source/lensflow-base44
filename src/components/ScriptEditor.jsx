@@ -1,9 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Sparkles, Edit3, ArrowRight, RotateCcw, Loader2 } from "lucide-react";
 
 export default function ScriptEditor({ script, onApprove, onRegenerate, isRegenerating }) {
   const [edited, setEdited] = useState(script);
   const [isEditing, setIsEditing] = useState(false);
+
+  useEffect(() => {
+    setEdited(script);
+    setIsEditing(false);
+  }, [script]);
 
   const handleRegenerate = () => {
     onRegenerate();

@@ -15,9 +15,11 @@ export default function Generate() {
   };
 
   const handleComplete = async (script) => {
-    const reel = await base44.entities.Reel.create({ listing_url: listingUrl, status: "complete", script: script || "" });
+    // Create with "generating" first, then update to "complete" to fire the automation trigger
+    const reel = await base44.entities.Reel.create({ listing_url: listingUrl, status: "generating", script: script || "" });
     setReelId(reel.id);
     setCurrentView("media");
+    await base44.entities.Reel.update(reel.id, { status: "complete" });
   };
 
   return (
