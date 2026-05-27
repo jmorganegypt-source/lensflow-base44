@@ -26,7 +26,7 @@ const PRESENTERS = [
   },
   {
     name: "Aria",
-    accent: "American",
+    accent: "Australian",
     role: "AI Presenter · 03",
     title: "Modern Lifestyle · Fresh & Confident",
     bio: "Vibrant American voice for new developments, lifestyle marketing and Instagram-first reels.",
@@ -44,7 +44,7 @@ const PRESENTERS = [
   },
   {
     name: "Emma",
-    accent: "American",
+    accent: "Australian",
     role: "AI Presenter · 05",
     title: "Coastal Editorial · Bright & Persuasive",
     bio: "Editorial brightness with a confident close. Built for waterfront, lifestyle and Instagram-first storytelling.",
