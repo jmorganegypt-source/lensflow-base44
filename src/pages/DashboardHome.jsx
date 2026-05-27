@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { base44 } from "@/api/base44Client";
 import { Film, Zap, TrendingUp, Clock, ArrowRight } from "lucide-react";
+import PropertyEngagementSummary from "../components/PropertyEngagementSummary";
 
 export default function DashboardHome() {
   const [user, setUser] = useState(null);
@@ -80,6 +81,12 @@ export default function DashboardHome() {
           </div>
         </div>
       </Link>
+
+      {/* Property Engagement Summary */}
+      <div>
+        <h2 className="text-white font-semibold mb-4">Market Engagement Summary</h2>
+        <PropertyEngagementSummary />
+      </div>
 
       {/* Recent reels */}
       <div>

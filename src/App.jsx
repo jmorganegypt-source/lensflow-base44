@@ -25,6 +25,7 @@ import SalesRepPortal from './pages/SalesRepPortal';
 import BrandVoiceAdvisor from './pages/BrandVoiceAdvisor';
 import HookGenerator from './pages/HookGenerator';
 import LensFlowAssistant from './pages/LensFlowAssistant';
+import BatchUpload from './pages/BatchUpload';
 import VideoHookAdvisor from './pages/VideoHookAdvisor';
 
 const AuthenticatedApp = () => {
@@ -70,6 +71,8 @@ const AuthenticatedApp = () => {
         <Route path="/dashboard/settings" element={<DashboardSettings />} />
       </Route>
       <Route path="/concierge" element={<Concierge />} />
+      <Route path="/batch-upload" element={<BatchUpload />} />
+      <Route path="/batch-upload" element={<BatchUpload />} />
       <Route path="/sales-rep-portal" element={<SalesRepPortal />} />
       <Route path="/brand-voice" element={<BrandVoiceAdvisor />} />
       <Route path="/hook-generator" element={<HookGenerator />} />
