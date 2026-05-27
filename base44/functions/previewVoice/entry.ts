@@ -11,10 +11,6 @@ const VOICE_IDS = {
 const SAMPLE_SCRIPT = "Welcome to this stunning prestige property. Exceptional craftsmanship, breathtaking views, and a lifestyle that truly sets the standard.";
 
 Deno.serve(async (req) => {
-  const base44 = createClientFromRequest(req);
-  const user = await base44.auth.me();
-  if (!user) return Response.json({ error: 'Unauthorized' }, { status: 401 });
-
   const { presenter_name } = await req.json();
   const voiceId = VOICE_IDS[presenter_name];
 
