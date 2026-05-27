@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { ArrowRight, Play } from "lucide-react";
+import { ArrowRight, Play, Loader2, Square } from "lucide-react";
+import { base44 } from "@/api/base44Client";
 
 const PRESENTERS = [
   {
@@ -51,7 +53,47 @@ const PRESENTERS = [
   },
 ];
 
+const VOICE_SAMPLES = {
+  Mia: { voice: "honey", language_code: "en-AU" },
+  Oliver: { voice: "storm", language_code: "en-GB" },
+  Aria: { voice: "sunny", language_code: "en-US" },
+  Marcus: { voice: "river", language_code: "en" },
+  Emma: { voice: "spark", language_code: "en-US" },
+};
+
+const SAMPLE_SCRIPT = "Welcome to this stunning prestige property. Exceptional craftsmanship, breathtaking views, and a lifestyle that truly sets the standard.";
+
 export default function Presenters() {
+  const [playingName, setPlayingName] = useState(null);
+  const [loadingName, setLoadingName] = useState(null);
+  const [audioRef, setAudioRef] = useState(null);
+
+  const handleHearVoice = async (presenterName) => {
+    // Stop any currently playing audio
+    if (audioRef) {
+      audioRef.pause();
+      audioRef.src = "";
+    }
+    if (playingName === presenterName) {
+      setPlayingName(null);
+      return;
+    }
+
+    setLoadingName(presenterName);
+    const config = VOICE_SAMPLES[presenterName];
+    const result = await base44.integrations.Core.GenerateSpeech({
+      text: SAMPLE_SCRIPT,
+      voice: config.voice,
+      language_code: config.language_code,
+    });
+    const audio = new Audio(result.url);
+    setAudioRef(audio);
+    setLoadingName(null);
+    setPlayingName(presenterName);
+    audio.play();
+    audio.onended = () => setPlayingName(null);
+  };
+
   return (
     <div className="min-h-screen" style={{ background: "#0a0e1a", color: "#f8fafc" }}>
       <Navbar />
@@ -88,12 +130,20 @@ export default function Presenters() {
                   ))}
                 </div>
                 <div className="flex gap-3">
-                  <a href="https://www.lensflow.com.au/presenters">
-                    <button className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium border border-white/20 text-white hover:border-white/40 transition-all">
+                  <button
+                    onClick={() => handleHearVoice(p.name)}
+                    disabled={loadingName === p.name}
+                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium border border-white/20 text-white hover:border-white/40 transition-all disabled:opacity-50"
+                  >
+                    {loadingName === p.name ? (
+                      <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                    ) : playingName === p.name ? (
+                      <Square className="w-3.5 h-3.5" />
+                    ) : (
                       <Play className="w-3.5 h-3.5" />
-                      Hear voice
-                    </button>
-                  </a>
+                    )}
+                    {loadingName === p.name ? "Generating..." : playingName === p.name ? "Stop" : "Hear voice"}
+                  </button>
                   <Link to="/generate">
                     <button className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium transition-all hover:opacity-90" style={{ background: "#C99A2E", color: "#0a0e1a" }}>
                       Try with {p.name} <ArrowRight className="w-3.5 h-3.5" />
