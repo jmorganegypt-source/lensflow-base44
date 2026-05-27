@@ -8,12 +8,14 @@ export default function VideoPlayer({ src, label, coverImage }) {
       <p className="text-xs font-mono text-white/40 px-3 pt-2">{label}</p>
       <div className="relative w-full h-56 md:h-64">
         {playing ?
-        <iframe
-          src={src + "&autoplay=1"}
-          className="w-full h-full"
-          allow="autoplay"
-          allowFullScreen
-          style={{ border: "none" }} /> :
+        <div className="w-full h-full flex items-center justify-center bg-black">
+          <iframe
+            src={src + "&autoplay=1"}
+            className="w-full h-full scale-75"
+            allow="autoplay"
+            allowFullScreen
+            style={{ border: "none", transformOrigin: "top center" }} />
+        </div> :
 
 
         <div
