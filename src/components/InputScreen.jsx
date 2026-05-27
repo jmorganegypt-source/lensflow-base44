@@ -22,11 +22,11 @@ export default function InputScreen({ onGenerate }) {
       {/* Header */}
       <header className="flex items-center justify-between px-8 py-4 border-b border-[#0F1A2E]/8 bg-[#FAF7F2]/90 backdrop-blur-sm sticky top-0 z-50">
         <a href="https://www.lensflow.com.au" className="flex items-center gap-2.5">
-          <img
-            src={LOGO}
-            alt="LensFlow"
-            className="h-9 w-auto"
-          />
+          <img src="https://media.base44.com/images/public/6a1440ebe28bb283cc5442e2/28910bf6b_LENSFLOWLOGO.png"
+
+          alt="LensFlow"
+          className="h-9 w-auto" />
+          
         </a>
         <nav className="hidden md:flex items-center gap-7">
           <a href="https://www.lensflow.com.au/presenters" className="text-sm text-[#0F1A2E]/60 hover:text-[#0F1A2E] transition-colors">Presenters</a>
@@ -79,13 +79,13 @@ export default function InputScreen({ onGenerate }) {
                     onFocus={() => setIsFocused(true)}
                     onBlur={() => setIsFocused(false)}
                     placeholder="Paste your property listing URL here"
-                    className="flex-1 border-0 bg-transparent text-[#0F1A2E] placeholder:text-[#0F1A2E]/30 text-base focus-visible:ring-0 focus-visible:ring-offset-0 h-12"
-                  />
+                    className="flex-1 border-0 bg-transparent text-[#0F1A2E] placeholder:text-[#0F1A2E]/30 text-base focus-visible:ring-0 focus-visible:ring-offset-0 h-12" />
+                  
                   <button
                     type="submit"
                     disabled={!url.trim()}
-                    className="h-12 px-6 rounded-xl bg-[#0F1A2E] hover:bg-[#1A2944] text-white text-sm font-semibold transition-all duration-300 disabled:opacity-30 inline-flex items-center gap-2"
-                  >
+                    className="h-12 px-6 rounded-xl bg-[#0F1A2E] hover:bg-[#1A2944] text-white text-sm font-semibold transition-all duration-300 disabled:opacity-30 inline-flex items-center gap-2">
+                    
                     <Sparkles className="w-4 h-4 text-[#C99A2E]" />
                     <span className="hidden sm:inline">Generate Reel</span>
                     <span className="sm:hidden">Generate</span>
@@ -119,8 +119,8 @@ export default function InputScreen({ onGenerate }) {
             <img
               src={HERO_IMG}
               alt="Luxury property showcase"
-              className="w-full rounded-xl"
-            />
+              className="w-full rounded-xl" />
+            
             <div className="absolute inset-0 bg-gradient-to-t from-[#0F1A2E]/40 via-transparent to-transparent rounded-xl" />
             <div className="absolute bottom-6 left-6 text-white">
               <p className="text-[10px] font-mono uppercase tracking-widest text-white/60 mb-1">Trusted by elite agents</p>
@@ -129,6 +129,6 @@ export default function InputScreen({ onGenerate }) {
           </div>
         </div>
       </main>
-    </div>
-  );
+    </div>);
+
 }
