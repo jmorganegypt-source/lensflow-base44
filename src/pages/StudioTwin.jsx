@@ -23,6 +23,30 @@ const TWINS = [
     img: "https://luxury-video-studio-1.emergent.host/assets/property/oliver-portrait.jpg",
     color: "from-blue-600 to-slate-700",
   },
+  {
+    name: "Aria",
+    accent: "American",
+    role: "Modern Lifestyle Specialist",
+    bio: "Vibrant and confident. Perfect for new developments, lifestyle marketing and social media-first reels.",
+    img: "https://luxury-video-studio-1.emergent.host/assets/property/aria-portrait.jpg",
+    color: "from-purple-500 to-pink-500",
+  },
+  {
+    name: "Marcus",
+    accent: "Continental European",
+    role: "International Luxury Expert",
+    bio: "Continental polish for international buyers. Translates the language of wealth and sophistication.",
+    img: "https://luxury-video-studio-1.emergent.host/assets/property/marcus-portrait.jpg",
+    color: "from-amber-600 to-orange-700",
+  },
+  {
+    name: "Emma",
+    accent: "Australian",
+    role: "Coastal Editorial Specialist",
+    bio: "Editorial brightness with confident storytelling. Built for waterfront, lifestyle and Instagram-first content.",
+    img: "https://luxury-video-studio-1.emergent.host/assets/property/emma-portrait.jpg",
+    color: "from-teal-500 to-cyan-500",
+  },
 ];
 
 export default function StudioTwin() {
@@ -53,7 +77,7 @@ export default function StudioTwin() {
       </section>
 
       <section className="pb-24 px-6">
-        <div className="max-w-4xl mx-auto space-y-8">
+        <div className="max-w-5xl mx-auto space-y-8">
           {TWINS.map((twin) => (
             <div
               key={twin.name}
