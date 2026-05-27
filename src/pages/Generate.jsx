@@ -30,11 +30,16 @@ export default function Generate() {
   };
 
   const handleComplete = async (script) => {
-    // Create with "generating" first, then update to "complete" to fire the automation trigger
-    const reel = await base44.entities.Reel.create({ listing_url: listingUrl, status: "generating", script: script || "" });
-    setReelId(reel.id);
-    setCurrentView("media");
-    await base44.entities.Reel.update(reel.id, { status: "complete" });
+    try {
+      // Create with "generating" first, then update to "complete" to fire the automation trigger
+      const reel = await base44.entities.Reel.create({ listing_url: listingUrl, status: "generating", script: script || "" });
+      setReelId(reel.id);
+      setCurrentView("media");
+      await base44.entities.Reel.update(reel.id, { status: "complete" });
+    } catch (error) {
+      console.error('Failed to create reel:', error);
+      alert('Error creating reel. Check console for details.');
+    }
   };
 
   return (
