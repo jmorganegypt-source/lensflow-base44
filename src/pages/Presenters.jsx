@@ -72,7 +72,11 @@ export default function Presenters() {
 
     setLoadingName(presenterName);
     const response = await base44.functions.invoke('previewVoice', { presenter_name: presenterName });
-    const url = URL.createObjectURL(new Blob([response.data], { type: 'audio/mpeg' }));
+    const { audio_base64 } = response.data;
+    const binary = atob(audio_base64);
+    const bytes = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+    const url = URL.createObjectURL(new Blob([bytes], { type: 'audio/mpeg' }));
     const audio = new Audio(url);
     setAudioRef(audio);
     setLoadingName(null);
