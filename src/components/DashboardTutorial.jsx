@@ -8,7 +8,7 @@ const STEPS = [
     icon: Lock,
     color: "#C99A2E",
     visual: "👤",
-    image: "https://media.base44.com/images/public/6a1440ebe28bb283cc5442e2/e7dd7faf3_generated_image.png",
+    image: "https://media.base44.com/images/public/6a1440ebe28bb283cc5442e2/248cdd4ee_generated_image.png",
   },
   {
     title: "Paste Your Listing URL",
@@ -16,7 +16,7 @@ const STEPS = [
     icon: LinkIcon,
     color: "#C99A2E",
     visual: "🔗",
-    image: "https://media.base44.com/images/public/6a1440ebe28bb283cc5442e2/7a65b6aeb_generated_image.png",
+    image: "https://media.base44.com/images/public/6a1440ebe28bb283cc5442e2/78c3f27a4_generated_image.png",
   },
   {
     title: "Generate Your Reel",
@@ -24,7 +24,7 @@ const STEPS = [
     icon: Sparkles,
     color: "#C99A2E",
     visual: "✨",
-    image: "https://media.base44.com/images/public/6a1440ebe28bb283cc5442e2/5147b4872_generated_image.png",
+    image: "https://media.base44.com/images/public/6a1440ebe28bb283cc5442e2/5ee48cc23_generated_image.png",
   },
   {
     title: "Watch in My Reels",
@@ -32,7 +32,7 @@ const STEPS = [
     icon: BarChart3,
     color: "#C99A2E",
     visual: "📹",
-    image: "https://media.base44.com/images/public/6a1440ebe28bb283cc5442e2/cc3580a12_generated_image.png",
+    image: "https://media.base44.com/images/public/6a1440ebe28bb283cc5442e2/f4de323da_generated_image.png",
   },
 ];
 
