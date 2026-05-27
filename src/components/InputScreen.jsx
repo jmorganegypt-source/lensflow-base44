@@ -67,7 +67,7 @@ export default function InputScreen({ onGenerate }) {
           {/* Input form */}
           <form onSubmit={handleSubmit} className="max-w-2xl mx-auto w-full pt-2">
             <div className={`relative rounded-2xl transition-all duration-300 ${isFocused ? "shadow-[0_0_40px_rgba(201,154,46,0.15)]" : "shadow-[0_4px_24px_rgba(15,26,46,0.08)]"}`}>
-              <div className="gradient-border rounded-2xl pointer-events-auto">
+              <div className="gradient-border rounded-2xl pointer-events-none">
                 <div className="flex items-center gap-3 p-2 rounded-2xl bg-white pointer-events-auto">
                   <div className="pl-4 pointer-events-none">
                     <Globe className="w-5 h-5 text-[#0F1A2E]/30" />
