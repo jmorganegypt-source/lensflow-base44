@@ -1,0 +1,66 @@
+{
+  "name": "PropertyInsights",
+  "type": "object",
+  "properties": {
+    "property_address": {
+      "type": "string",
+      "title": "Property Address"
+    },
+    "listing_url": {
+      "type": "string",
+      "title": "Listing URL"
+    },
+    "comparable_sales": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          },
+          "sold_date": {
+            "type": "string"
+          }
+        }
+      },
+      "title": "Comparable Sales"
+    },
+    "market_velocity": {
+      "type": "string",
+      "title": "Market Velocity",
+      "enum": [
+        "hot",
+        "balanced",
+        "cool"
+      ],
+      "description": "Current market temperature"
+    },
+    "average_dom": {
+      "type": "number",
+      "title": "Average Days on Market"
+    },
+    "price_appreciation": {
+      "type": "number",
+      "title": "YoY Price Appreciation %"
+    },
+    "buyer_demographics": {
+      "type": "string",
+      "title": "Buyer Demographics"
+    },
+    "market_insights": {
+      "type": "string",
+      "title": "Market Insights Summary"
+    },
+    "script_enhancement": {
+      "type": "string",
+      "title": "Script Enhancement Text"
+    }
+  },
+  "required": [
+    "property_address",
+    "listing_url"
+  ]
+}
