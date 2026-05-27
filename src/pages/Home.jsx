@@ -28,7 +28,10 @@ const FEATURES = [
     title: "Listing videos — without filming yourself.",
     body: "Mia or Oliver narrates your listing over a Ken-Burns slideshow of your photos. Get a downloadable MP4 in under a minute. Perfect for camera-shy agents.",
     img: MIA,
-    video: "https://drive.google.com/file/d/1uRfjDgzVXunEf0mPwWedL3CtZNXVneld/preview",
+    videos: [
+      { label: "Mia", src: "https://drive.google.com/file/d/1uRfjDgzVXunEf0mPwWedL3CtZNXVneld/preview" },
+      { label: "Oliver", src: "https://drive.google.com/file/d/1Uk99bSMX8casyTyFH2Q7xVx6LD1s6C3M/preview" },
+    ],
   },
   {
     num: "03",
@@ -165,17 +168,24 @@ export default function Home() {
                     </button>
                   </a>
                 </div>
-                <div className="flex-1 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-                  {f.video ? (
-                    <iframe
-                      src={f.video}
-                      className="w-full h-64 md:h-80"
-                      allow="autoplay"
-                      allowFullScreen
-                      style={{ border: "none" }}
-                    />
+                <div className="flex-1 flex flex-col gap-4">
+                  {f.videos ? (
+                    f.videos.map((v, vi) => (
+                      <div key={vi} className="rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+                        <p className="text-xs font-mono text-white/40 px-3 pt-2">{v.label}</p>
+                        <iframe
+                          src={v.src}
+                          className="w-full h-56 md:h-64"
+                          allow="autoplay"
+                          allowFullScreen
+                          style={{ border: "none" }}
+                        />
+                      </div>
+                    ))
                   ) : (
-                    <img src={f.img} alt={f.label} className="w-full h-64 md:h-80 object-cover" />
+                    <div className="rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+                      <img src={f.img} alt={f.label} className="w-full h-64 md:h-80 object-cover" />
+                    </div>
                   )}
                 </div>
               </div>
