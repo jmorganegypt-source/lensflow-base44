@@ -160,11 +160,11 @@ export default function Presenters() {
             ))}
           </ul>
           <div className="flex flex-wrap justify-center gap-3">
-            <a href="https://www.lensflow.com.au/done-for-you">
+            <Link to="/generate">
               <button className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm transition-all" style={{ background: "#C99A2E", color: "#0a0e1a" }}>
                 Begin VIP intake
               </button>
-            </a>
+            </Link>
             <Link to="/pricing">
               <button className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm border border-white/20 text-white hover:border-white/40 transition-all">
                 See Concierge plan →

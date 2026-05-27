@@ -87,14 +87,14 @@ export default function Home() {
               ))}
             </ul>
             <div className="flex flex-wrap gap-3">
-              <a href="https://www.lensflow.com.au/register">
+              <a href="/dashboard">
                 <button className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-semibold text-sm transition-all hover:opacity-90" style={{ background: "#C99A2E", color: "#0a0e1a" }}>
                   <Sparkles className="w-4 h-4" />
                   Start your trial
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </a>
-              <a href="https://www.lensflow.com.au/concierge">
+              <a href="/generate">
                 <button className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-semibold text-sm border border-white/20 text-white hover:border-white/40 transition-all">
                   <Film className="w-4 h-4" />
                   Book a live demo
@@ -244,7 +244,7 @@ export default function Home() {
                     ))}
                   </ul>
                 )}
-                <a href="https://www.lensflow.com.au/register">
+                <a href="/dashboard">
                   <button className={`w-full py-2.5 rounded-xl text-sm font-semibold transition-all ${plan.popular ? "" : "border border-white/15 text-white hover:border-white/30"}`} style={plan.popular ? { background: "#C99A2E", color: "#0a0e1a" } : {}}>
                     {plan.cta}
                   </button>
@@ -252,9 +252,9 @@ export default function Home() {
               </div>
             ))}
           </div>
-          <Link to="/pricing" className="text-sm hover:opacity-70 transition-opacity" style={{ color: "#C99A2E" }}>
+          <a href="/pricing" className="text-sm hover:opacity-70 transition-opacity" style={{ color: "#C99A2E" }}>
             See full pricing + feature comparison
-          </Link>
+          </a>
         </div>
       </section>
 

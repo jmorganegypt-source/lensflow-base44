@@ -17,7 +17,7 @@ export default function Navbar() {
         <Link to="/pricing" className="text-sm text-white/60 hover:text-white transition-colors">Pricing</Link>
         <Link to="/compare" className="text-sm text-white/60 hover:text-white transition-colors">Compare</Link>
         <Link to="/how-it-works" className="text-sm text-white/60 hover:text-white transition-colors">How It Works</Link>
-        <a href="https://www.lensflow.com.au/done-for-you" target="_blank" rel="noopener noreferrer" className="text-sm text-white/60 hover:text-white transition-colors">Done-for-You</a>
+        <Link to="/generate" className="text-sm text-white/60 hover:text-white transition-colors">Done-for-You</Link>
         <Link to="/dashboard" className="text-sm text-white/60 hover:text-white transition-colors">Dashboard</Link>
         <Link to="/dashboard" className="text-sm text-white/60 hover:text-white transition-colors">Sign In</Link>
         <Link to="/generate">

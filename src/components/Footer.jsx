@@ -24,16 +24,16 @@ export default function Footer() {
             <div className="space-y-3">
               <p className="text-white/30 font-mono uppercase tracking-widest text-xs">Platform</p>
               <div className="space-y-2">
-                <a href="https://www.lensflow.com.au/register" className="block text-white/60 hover:text-white transition-colors">Start Trial</a>
-                <a href="https://www.lensflow.com.au/done-for-you" className="block text-white/60 hover:text-white transition-colors">Done-for-You</a>
-                <a href="https://www.lensflow.com.au/login" className="block text-white/60 hover:text-white transition-colors">Sign In</a>
+                <Link to="/dashboard" className="block text-white/60 hover:text-white transition-colors">Start Trial</Link>
+                <Link to="/generate" className="block text-white/60 hover:text-white transition-colors">Done-for-You</Link>
+                <Link to="/dashboard" className="block text-white/60 hover:text-white transition-colors">Sign In</Link>
               </div>
             </div>
             <div className="space-y-3">
               <p className="text-white/30 font-mono uppercase tracking-widest text-xs">Legal</p>
               <div className="space-y-2">
-                <a href="https://www.lensflow.com.au" className="block text-white/60 hover:text-white transition-colors">Privacy</a>
-                <a href="https://www.lensflow.com.au" className="block text-white/60 hover:text-white transition-colors">Terms</a>
+                <a href="#" className="block text-white/60 hover:text-white transition-colors">Privacy</a>
+                <a href="#" className="block text-white/60 hover:text-white transition-colors">Terms</a>
               </div>
             </div>
           </div>

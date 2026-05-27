@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 import { ArrowRight, Upload, User, Mic, Sparkles, Download } from "lucide-react";
 
 const HERO_BG = "https://media.base44.com/images/public/6a1440ebe28bb283cc5442e2/146903c3c_hero-luxury-property-twilight.png";
-const MIA = "https://lensflow.com.au/assets/property/mia-headshot.jpg";
+const MIA = "https://luxury-video-studio-1.emergent.host/assets/property/mia-headshot.jpg";
 
 const STEPS = [
   {
@@ -45,21 +45,21 @@ const MODES = [
     badge: "01",
     desc: "For agents who'd rather not film themselves. Drop a script and listing photos. Pick a presenter. LensFlow composes a finished MP4 listing video — narrated by AI, Ken-Burns slideshow. No camera, no anxiety.",
     cta: "Try Confidence Mode",
-    href: "https://www.lensflow.com.au/register",
+    href: "/dashboard",
   },
   {
     title: "Glamour Studio",
     badge: "02",
     desc: "iPhone photos → Architectural Digest grade. Upload a regular listing photo. Pick a look — Magazine HDR, Golden Hour, Dusk Twilight, Lifestyle, Interior Polish. Powered by AI image enhancement.",
     cta: "Try Glamour Studio",
-    href: "https://www.lensflow.com.au/register",
+    href: "/dashboard",
   },
   {
     title: "Voice Clone · Elite",
     badge: "03",
     desc: "Listings in your voice — without filming. Record 60 seconds. ElevenLabs clones your voice. Every future listing video is narrated by you, on autopilot. Personal brand without the camera.",
     cta: "See Elite Partner",
-    href: "https://www.lensflow.com.au/pricing",
+    href: "/pricing",
   },
 ];
 
@@ -154,7 +154,7 @@ export default function HowItWorks() {
                   Make my first listing
                 </button>
               </Link>
-              <a href="https://www.lensflow.com.au/register">
+              <a href="/dashboard">
                 <button className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm border border-white/20 text-white hover:border-white/40 transition-all">
                   Start free trial
                 </button>
