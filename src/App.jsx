@@ -11,6 +11,9 @@ import Presenters from './pages/Presenters';
 import Pricing from './pages/Pricing';
 import Compare from './pages/Compare';
 import Generate from './pages/Generate';
+import Studio from './pages/Studio';
+import StudioRecord from './pages/StudioRecord';
+import StudioTwin from './pages/StudioTwin';
 import DashboardLayout from './components/DashboardLayout';
 import DashboardHome from './pages/DashboardHome';
 import MyReels from './pages/MyReels';
@@ -54,6 +57,9 @@ const AuthenticatedApp = () => {
       <Route path="/compare" element={<Compare />} />
       <Route path="/how-it-works" element={<HowItWorks />} />
       <Route path="/generate" element={<Generate />} />
+      <Route path="/studio" element={<Studio />} />
+      <Route path="/studio/record" element={<StudioRecord />} />
+      <Route path="/studio/twin" element={<StudioTwin />} />
       <Route element={<DashboardLayout />}>
         <Route path="/dashboard" element={<DashboardHome />} />
         <Route path="/dashboard/reels" element={<MyReels />} />
