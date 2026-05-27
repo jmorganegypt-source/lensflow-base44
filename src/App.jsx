@@ -8,10 +8,11 @@ import UserNotRegisteredError from '@/components/UserNotRegisteredError';
 import Home from './pages/Home';
 import HowItWorks from './pages/HowItWorks';
 import Presenters from './pages/Presenters';
-import Pricing from './pages/Pricing';
+import NewPricing from './pages/NewPricing';
 import Compare from './pages/Compare';
 import Generate from './pages/Generate';
-import Studio from './pages/Studio';
+import NewStudio from './pages/NewStudio';
+import Concierge from './pages/Concierge';
 import StudioRecord from './pages/StudioRecord';
 import StudioTwin from './pages/StudioTwin';
 import Enhance from './pages/Enhance';
@@ -54,11 +55,11 @@ const AuthenticatedApp = () => {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/presenters" element={<Presenters />} />
-      <Route path="/pricing" element={<Pricing />} />
+      <Route path="/pricing" element={<NewPricing />} />
       <Route path="/compare" element={<Compare />} />
       <Route path="/how-it-works" element={<HowItWorks />} />
       <Route path="/generate" element={<Generate />} />
-      <Route path="/studio" element={<Studio />} />
+      <Route path="/studio" element={<NewStudio />} />
       <Route path="/studio/record" element={<StudioRecord />} />
       <Route path="/studio/twin" element={<StudioTwin />} />
       <Route path="/enhance" element={<Enhance />} />
@@ -68,6 +69,7 @@ const AuthenticatedApp = () => {
         <Route path="/dashboard/billing" element={<Billing />} />
         <Route path="/dashboard/settings" element={<DashboardSettings />} />
       </Route>
+      <Route path="/concierge" element={<Concierge />} />
       <Route path="/sales-rep-portal" element={<SalesRepPortal />} />
       <Route path="/brand-voice" element={<BrandVoiceAdvisor />} />
       <Route path="/hook-generator" element={<HookGenerator />} />
