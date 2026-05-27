@@ -84,7 +84,7 @@ export default function InputScreen({ onGenerate }) {
                   <button
                     type="submit"
                     disabled={!url.trim()}
-                    className="h-12 px-6 rounded-xl bg-[#0F1A2E] hover:bg-[#1A2944] text-white text-sm font-semibold transition-all duration-300 disabled:opacity-30 inline-flex items-center gap-2">
+                    className="h-12 px-6 rounded-xl bg-[#0F1A2E] hover:bg-[#1A2944] text-white text-sm font-semibold transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center gap-2">
                     
                     <Sparkles className="w-4 h-4 text-[#C99A2E]" />
                     <span className="hidden sm:inline">Generate Reel</span>
