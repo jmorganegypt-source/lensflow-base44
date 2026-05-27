@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { ArrowRight, Play, Loader2, Square } from "lucide-react";
+import { ArrowRight, Play, Loader2, Square, Lock } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 
 const PRESENTERS = [
@@ -130,20 +130,31 @@ export default function Presenters() {
                   ))}
                 </div>
                 <div className="flex gap-3">
-                  <button
-                    onClick={() => handleHearVoice(p.name)}
-                    disabled={loadingName === p.name}
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium border border-white/20 text-white hover:border-white/40 transition-all disabled:opacity-50"
-                  >
-                    {loadingName === p.name ? (
-                      <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                    ) : playingName === p.name ? (
-                      <Square className="w-3.5 h-3.5" />
-                    ) : (
-                      <Play className="w-3.5 h-3.5" />
+                  <div className="flex flex-col gap-1.5">
+                    <button
+                      onClick={() => handleHearVoice(p.name)}
+                      disabled={loadingName === p.name}
+                      className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium border transition-all disabled:opacity-50 ${
+                        isAuthenticated
+                          ? "border-white/20 text-white hover:border-white/40"
+                          : "border-dashed border-white/30 text-white/50 hover:border-white/50 hover:text-white/70"
+                      }`}
+                    >
+                      {loadingName === p.name ? (
+                        <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                      ) : playingName === p.name ? (
+                        <Square className="w-3.5 h-3.5" />
+                      ) : isAuthenticated ? (
+                        <Play className="w-3.5 h-3.5" />
+                      ) : (
+                        <Lock className="w-3.5 h-3.5" />
+                      )}
+                      {loadingName === p.name ? "Generating..." : playingName === p.name ? "Stop" : isAuthenticated ? "Hear voice" : "Sign in to hear voice"}
+                    </button>
+                    {!isAuthenticated && (
+                      <p className="text-xs text-white/30 pl-1">🔒 Audio previews require a free account</p>
                     )}
-                    {loadingName === p.name ? "Generating..." : playingName === p.name ? "Stop" : isAuthenticated ? "Hear voice" : "Log in to hear voice"}
-                  </button>
+                  </div>
                   <Link to="/generate">
                     <button className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium transition-all hover:opacity-90" style={{ background: "#C99A2E", color: "#0a0e1a" }}>
                       Try with {p.name} <ArrowRight className="w-3.5 h-3.5" />
