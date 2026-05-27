@@ -5,7 +5,7 @@ const VOICE_IDS = {
   Mia: "69h9o7wh5u0isWHzdogD",
   Aria: "69h9o7wh5u0isWHzdogD",
   Marcus: null,
-  Emma: null,
+  Emma: "69h9o7wh5u0isWHzdogD",
 };
 
 const SAMPLE_SCRIPT = "Welcome to this stunning prestige property. Exceptional craftsmanship, breathtaking views, and a lifestyle that truly sets the standard.";
