@@ -134,11 +134,11 @@ export default function Presenters() {
                     <button
                       onClick={() => handleHearVoice(p.name)}
                       disabled={loadingName === p.name}
-                      className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium border transition-all disabled:opacity-50 ${
+                      className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium border transition-all cursor-pointer disabled:cursor-not-allowed ${
                         isAuthenticated
-                          ? "border-white/20 text-white hover:border-white/40"
-                          : "border-dashed border-white/30 text-white/50 hover:border-white/50 hover:text-white/70"
-                      }`}
+                          ? "border-white/20 text-white hover:border-white/40 hover:bg-white/5"
+                          : "border-dashed border-white/30 text-white/60 hover:border-white/50 hover:text-white hover:bg-white/5"
+                      } ${loadingName === p.name ? "opacity-60" : ""}`}
                     >
                       {loadingName === p.name ? (
                         <Loader2 className="w-3.5 h-3.5 animate-spin" />
