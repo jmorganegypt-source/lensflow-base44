@@ -14,6 +14,7 @@ import Generate from './pages/Generate';
 import Studio from './pages/Studio';
 import StudioRecord from './pages/StudioRecord';
 import StudioTwin from './pages/StudioTwin';
+import Enhance from './pages/Enhance';
 import DashboardLayout from './components/DashboardLayout';
 import DashboardHome from './pages/DashboardHome';
 import MyReels from './pages/MyReels';
@@ -60,6 +61,7 @@ const AuthenticatedApp = () => {
       <Route path="/studio" element={<Studio />} />
       <Route path="/studio/record" element={<StudioRecord />} />
       <Route path="/studio/twin" element={<StudioTwin />} />
+      <Route path="/enhance" element={<Enhance />} />
       <Route element={<DashboardLayout />}>
         <Route path="/dashboard" element={<DashboardHome />} />
         <Route path="/dashboard/reels" element={<MyReels />} />
