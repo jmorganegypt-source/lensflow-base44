@@ -18,6 +18,7 @@ import Billing from './pages/Billing';
 import DashboardSettings from './pages/DashboardSettings';
 import SalesRepPortal from './pages/SalesRepPortal';
 import BrandVoiceAdvisor from './pages/BrandVoiceAdvisor';
+import VideoHookAdvisor from './pages/VideoHookAdvisor';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -59,6 +60,7 @@ const AuthenticatedApp = () => {
       </Route>
       <Route path="/sales-rep-portal" element={<SalesRepPortal />} />
       <Route path="/brand-voice" element={<BrandVoiceAdvisor />} />
+      <Route path="/video-hooks" element={<VideoHookAdvisor />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
