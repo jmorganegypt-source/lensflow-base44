@@ -1,9 +1,9 @@
 import { createClientFromRequest } from 'npm:@base44/sdk@0.8.25';
 
 const VOICE_IDS = {
-  Oliver: "jRAAK67SEFE9m7ci5DhD",
+  Oliver: null,
   Mia: "69h9o7wh5u0isWHzdogD",
-  Aria: null,
+  Aria: "jRAAK67SEFE9m7ci5DhD",
   Marcus: null,
   Emma: null,
 };
