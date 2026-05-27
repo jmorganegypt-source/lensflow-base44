@@ -118,8 +118,8 @@ export default function HowItWorks() {
                 <span className="text-xs font-mono text-white/30 mb-3">{m.badge} —</span>
                 <h3 className="text-xl font-bold mb-3">{m.title}</h3>
                 <p className="text-white/60 text-sm leading-relaxed mb-6 flex-1">{m.desc}</p>
-                <a href={m.href}>
-                  <button className="inline-flex items-center gap-2 text-sm font-medium hover:opacity-70 transition-opacity" style={{ color: "#C99A2E" }}>
+                <a href={m.href} className="inline-block">
+                  <button className="inline-flex items-center gap-2 text-sm font-medium cursor-pointer hover:opacity-70 transition-opacity" style={{ color: "#C99A2E" }}>
                     {m.cta} <ArrowRight className="w-3.5 h-3.5" />
                   </button>
                 </a>
@@ -148,14 +148,14 @@ export default function HowItWorks() {
               ))}
             </ul>
             <div className="flex gap-3 flex-wrap pt-2">
-              <Link to="/generate">
-                <button className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm transition-all hover:opacity-90" style={{ background: "#C99A2E", color: "#0a0e1a" }}>
+              <Link to="/generate" className="inline-block">
+                <button className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm transition-all cursor-pointer hover:opacity-90" style={{ background: "#C99A2E", color: "#0a0e1a" }}>
                   <Sparkles className="w-4 h-4" />
                   Make my first listing
                 </button>
               </Link>
-              <a href="/dashboard">
-                <button className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm border border-white/20 text-white hover:border-white/40 transition-all">
+              <a href="/dashboard" className="inline-block">
+                <button className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm cursor-pointer border border-white/20 text-white hover:border-white/40 transition-all">
                   Start free trial
                 </button>
               </a>

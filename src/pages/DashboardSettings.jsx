@@ -98,7 +98,7 @@ export default function DashboardSettings() {
         <button
           onClick={handleSave}
           disabled={saving}
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all hover:opacity-90 disabled:opacity-50"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all cursor-pointer hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
           style={{ background: "#C99A2E", color: "#0a0e1a" }}
         >
           <Save className="w-4 h-4" />

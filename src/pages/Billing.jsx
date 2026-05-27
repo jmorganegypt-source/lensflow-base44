@@ -47,7 +47,6 @@ export default function Billing() {
         <p className="text-white/40 text-sm mt-1">Manage your LensFlow subscription.</p>
       </div>
 
-      {/* Current plan info */}
       <div className="rounded-2xl p-6 border border-white/8" style={{ background: "rgba(255,255,255,0.04)" }}>
         <div className="flex items-start justify-between flex-wrap gap-4">
           <div className="flex items-center gap-3">
@@ -68,7 +67,6 @@ export default function Billing() {
         </div>
       </div>
 
-      {/* Plans */}
       <div>
         <h2 className="text-white font-semibold mb-4">Available Plans</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -93,8 +91,8 @@ export default function Billing() {
                   </li>
                 ))}
               </ul>
-              <a href={href} target="_blank" rel="noopener noreferrer">
-                <button className={`w-full py-2.5 rounded-xl text-sm font-semibold transition-all hover:opacity-90 ${popular ? "" : "border border-white/12 text-white hover:border-white/25"}`} style={popular ? { background: "#C99A2E", color: "#0a0e1a" } : {}}>
+              <a href={href} target="_blank" rel="noopener noreferrer" className="block">
+                <button className={`w-full py-2.5 rounded-xl text-sm font-semibold transition-all cursor-pointer hover:opacity-90 ${popular ? "" : "border border-white/12 text-white hover:border-white/25"}`} style={popular ? { background: "#C99A2E", color: "#0a0e1a" } : {}}>
                   Subscribe
                 </button>
               </a>
@@ -103,7 +101,6 @@ export default function Billing() {
         </div>
       </div>
 
-      {/* Done for you */}
       <div className="rounded-2xl p-6 border border-white/8" style={{ background: "rgba(255,255,255,0.02)" }}>
         <div className="flex items-center justify-between flex-wrap gap-4">
           <div>

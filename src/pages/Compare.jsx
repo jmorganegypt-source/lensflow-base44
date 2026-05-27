@@ -139,8 +139,8 @@ export default function Compare() {
         <div className="max-w-2xl mx-auto text-center p-10 rounded-2xl border border-white/10" style={{ background: "rgba(201,154,46,0.04)" }}>
           <h3 className="text-2xl font-bold mb-3">Our 20% guarantee.</h3>
           <p className="text-white/60 mb-6 leading-relaxed">Show us a comparable quote from <em>any</em> AI video tool and we'll beat it by 20%, <strong className="text-white">locked in for 12 months</strong>.</p>
-          <a href="/dashboard">
-            <button className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm transition-all hover:opacity-90" style={{ background: "#C99A2E", color: "#0a0e1a" }}>
+          <a href="/dashboard" className="inline-block">
+            <button className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm transition-all cursor-pointer hover:opacity-90" style={{ background: "#C99A2E", color: "#0a0e1a" }}>
               Start your 7-day free trial
             </button>
           </a>

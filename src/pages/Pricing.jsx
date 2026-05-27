@@ -97,7 +97,6 @@ export default function Pricing() {
         <p className="text-lg text-white/50 max-w-xl mx-auto">Three tiers · Try every feature free for 7 days · Cancel anytime before day 8 and you're never charged.</p>
       </section>
 
-      {/* Plans */}
       <section className="pb-24 px-6">
         <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-4">
           {PLANS.map((plan) => (
@@ -115,8 +114,8 @@ export default function Pricing() {
               </div>
               <p className="text-xs font-mono uppercase tracking-widest mb-5" style={{ color: "#C99A2E" }}>7-day free trial</p>
               <div className="mb-6">
-                <a href={plan.href} target="_blank" rel="noopener noreferrer">
-                  <button className={`w-full py-3 rounded-xl text-sm font-semibold transition-all ${plan.popular ? "hover:opacity-90" : "border border-white/15 text-white hover:border-white/30"}`} style={plan.popular ? { background: "#C99A2E", color: "#0a0e1a" } : {}}>
+                <a href={plan.href} target="_blank" rel="noopener noreferrer" className="block">
+                  <button className={`w-full py-3 rounded-xl text-sm font-semibold transition-all cursor-pointer ${plan.popular ? "hover:opacity-90" : "border border-white/15 text-white hover:border-white/30"}`} style={plan.popular ? { background: "#C99A2E", color: "#0a0e1a" } : {}}>
                     {plan.cta}
                   </button>
                 </a>
@@ -133,7 +132,6 @@ export default function Pricing() {
           ))}
         </div>
 
-        {/* Done-for-You */}
         <div className="max-w-5xl mx-auto mt-6 p-7 rounded-2xl border border-white/10 flex flex-col md:flex-row items-center justify-between gap-6" style={{ background: "rgba(255,255,255,0.02)" }}>
           <div>
             <p className="text-xs font-mono uppercase tracking-widest text-white/30 mb-1">Done-for-You · Skip the studio</p>
@@ -152,7 +150,6 @@ export default function Pricing() {
         </div>
       </section>
 
-      {/* Feature table */}
       <section className="pb-24 px-6">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-10">Exactly what's in each tier.</h2>
@@ -181,7 +178,6 @@ export default function Pricing() {
         </div>
       </section>
 
-      {/* Guarantee */}
       <section className="pb-24 px-6">
         <div className="max-w-2xl mx-auto text-center p-10 rounded-2xl border border-white/10" style={{ background: "rgba(201,154,46,0.04)" }}>
           <Star className="w-8 h-8 mx-auto mb-4" style={{ color: "#C99A2E" }} />

@@ -65,9 +65,11 @@ export default function SalesRepPortal() {
       await base44.functions.invoke('syncToCRMAppUser', { customerId: customer.id });
       fetchCustomers();
     } catch (error) {
-      console.error('Sync failed:', error);
+      console.error('Sync failed:', error.message);
+      alert('Sync failed: ' + (error.message || 'Unknown error'));
+    } finally {
+      setSyncing(null);
     }
-    setSyncing(null);
   };
 
   return (

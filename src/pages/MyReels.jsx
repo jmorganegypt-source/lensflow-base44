@@ -32,15 +32,14 @@ export default function MyReels() {
           <h1 className="text-2xl font-bold text-white">My Reels</h1>
           <p className="text-white/40 text-sm mt-1">{reels.length} reel{reels.length !== 1 ? "s" : ""} generated</p>
         </div>
-        <Link to="/generate">
-          <button className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all hover:opacity-90" style={{ background: "#C99A2E", color: "#0a0e1a" }}>
+        <Link to="/generate" className="block">
+          <button className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all cursor-pointer hover:opacity-90" style={{ background: "#C99A2E", color: "#0a0e1a" }}>
             <Zap className="w-4 h-4" />
             New Reel
           </button>
         </Link>
       </div>
 
-      {/* Search */}
       <div className="relative">
         <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
         <input
@@ -62,8 +61,8 @@ export default function MyReels() {
           <Film className="w-10 h-10 text-white/15 mx-auto mb-4" />
           <p className="text-white/40 text-sm">{search ? "No reels match your search." : "No reels yet — generate your first one!"}</p>
           {!search && (
-            <Link to="/generate">
-              <button className="mt-4 px-5 py-2 rounded-xl text-sm font-semibold" style={{ background: "#C99A2E", color: "#0a0e1a" }}>
+            <Link to="/generate" className="inline-block">
+              <button className="mt-4 px-5 py-2 rounded-xl text-sm font-semibold cursor-pointer" style={{ background: "#C99A2E", color: "#0a0e1a" }}>
                 Generate Now
               </button>
             </Link>
